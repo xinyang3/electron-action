@@ -5,9 +5,10 @@ process.env.NODE_ENV = 'production'
 const { say } = require('cfonts')
 const chalk = require('chalk')
 const del = require('del')
-const packager = require('electron-packager')
+// const packager = require('electron-packager')
 const webpack = require('webpack')
 const Multispinner = require('multispinner')
+const electronBuilder = require('electron-builder')
 
 const buildConfig = require('./build.config')
 const mainConfig = require('./webpack.main.config')
@@ -42,11 +43,13 @@ function build () {
 
   let results = ''
 
-  m.on('success', () => {
+  m.on('success', (e) => {
     process.stdout.write('\x1B[2J\x1B[0f')
     console.log(`\n\n${results}`)
+    console.log(`${doneLog}`, `process build success`);
+
     console.log(`${okayLog}take it away ${chalk.yellow('`electron-packager`')}\n`)
-    bundleApp()
+    // bundleApp()
   })
 
   pack(mainConfig).then(result => {
@@ -82,10 +85,10 @@ function pack (config) {
           chunks: false,
           colors: true
         })
-        .split(/\r?\n/)
-        .forEach(line => {
-          err += `    ${line}\n`
-        })
+          .split(/\r?\n/)
+          .forEach(line => {
+            err += `    ${line}\n`
+          })
 
         reject(err)
       } else {

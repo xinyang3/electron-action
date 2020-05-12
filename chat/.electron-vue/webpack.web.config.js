@@ -96,7 +96,7 @@ let webConfig = {
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, '../src/index.ejs'),
+      template: path.resolve(__dirname, '../src/index.html'),
       templateParameters (compilation, assets, options) {
         return {
           compilation: compilation,

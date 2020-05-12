@@ -11,6 +11,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
+const sysConfig = require('../config-sys')
 
 let electronProcess = null
 let manualRestart = false
@@ -73,7 +74,7 @@ function startRenderer () {
       }
     )
 
-    server.listen(9080)
+    server.listen(sysConfig.port)
   })
 }
 
@@ -92,7 +93,7 @@ function startMain () {
 
     compiler.watch({}, (err, stats) => {
       if (err) {
-        console.log(err)
+        console.error(err)
         return
       }
 
@@ -122,11 +123,11 @@ function startElectron () {
   ]
 
   // detect yarn or npm and process commandline args accordingly
-  if (process.env.npm_execpath.endsWith('yarn.js')) {
-    args = args.concat(process.argv.slice(3))
-  } else if (process.env.npm_execpath.endsWith('npm-cli.js')) {
-    args = args.concat(process.argv.slice(2))
-  }
+  // if (process.env.npm_execpath.endsWith('yarn.js')) {
+  //   args = args.concat(process.argv.slice(3))
+  // } else if (process.env.npm_execpath.endsWith('npm-cli.js')) {
+  args = args.concat(process.argv.slice(2))
+  // }
 
   electronProcess = spawn(electron, args)
 

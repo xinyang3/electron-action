@@ -27,7 +27,7 @@ let rendererConfig = {
     renderer: path.join(__dirname, '../src/renderer/main.js')
   },
   externals: [
-    ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
+    // ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
   ],
   module: {
     rules: [
@@ -123,20 +123,22 @@ let rendererConfig = {
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
     new HtmlWebpackPlugin({
+      title: 'abcd',
       filename: 'index.html',
-      template: path.resolve(__dirname, '../src/index.ejs'),
-      templateParameters (compilation, assets, options) {
-        return {
-          compilation: compilation,
-          webpack: compilation.getStats().toJson(),
-          webpackConfig: compilation.options,
-          htmlWebpackPlugin: {
-            files: assets,
-            options: options
-          },
-          process,
-        };
-      },
+      // templateParameters (compilation, assets, options) {
+      //   console.log(options)
+      //   return {
+      //     compilation: compilation,
+      //     webpack: compilation.getStats().toJson(),
+      //     webpackConfig: compilation.options,
+      //     htmlWebpackPlugin: {
+      //       files: assets,
+      //       options: object.assign({}, options, sysConfig)
+      //     },
+      //     process,
+      //   };
+      // },
+      template: path.resolve(__dirname, '../src/index.html'),
       minify: {
         collapseWhitespace: true,
         removeAttributeQuotes: true,
