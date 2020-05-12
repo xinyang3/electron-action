@@ -1,4 +1,5 @@
 .DS_Store
+dist/
 dist/electron/*
 dist/web/*
 build/*
@@ -10,4 +11,3 @@ npm-debug.log.*
 thumbs.db
 !.gitkeep
 out/
-out1/

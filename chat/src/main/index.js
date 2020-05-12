@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
+import sysConfig from '../../config-sys'
 
 /**
  * Set `__static` path to static files in production
@@ -12,9 +13,10 @@ if (process.env.NODE_ENV !== 'development') {
 
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:9080`
+  ? `http://${sysConfig.host}:${sysConfig.port}`
   : `file://${__dirname}/index.html`
 
+console.log(winURL)
 function createWindow () {
   /**
    * Initial window options
@@ -22,7 +24,10 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
-    width: 1000
+    width: 1000,
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
 
   mainWindow.loadURL(winURL)

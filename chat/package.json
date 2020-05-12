@@ -105,7 +105,7 @@
       "!node_modules/*"
     ],
     "directories": {
-      "output": "out"
+      "output": "build"
     },
     "nsis": {
       "oneClick": false,
