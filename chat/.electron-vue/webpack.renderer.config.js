@@ -11,6 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const sysConfig = require('../config-sys')
 
 /**
  * List of node_modules to include in webpack bundle
@@ -60,7 +61,8 @@ let rendererConfig = {
       },
       {
         test: /\.html$/,
-        use: 'vue-html-loader'
+        use: 'vue-html-loader',
+        exclude: /index\.html/
       },
       {
         test: /\.js$/,
@@ -123,21 +125,19 @@ let rendererConfig = {
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
     new HtmlWebpackPlugin({
-      title: 'abcd',
       filename: 'index.html',
-      // templateParameters (compilation, assets, options) {
-      //   console.log(options)
-      //   return {
-      //     compilation: compilation,
-      //     webpack: compilation.getStats().toJson(),
-      //     webpackConfig: compilation.options,
-      //     htmlWebpackPlugin: {
-      //       files: assets,
-      //       options: object.assign({}, options, sysConfig)
-      //     },
-      //     process,
-      //   };
-      // },
+      templateParameters (compilation, assets, options) {
+        return {
+          compilation: compilation,
+          webpack: compilation.getStats().toJson(),
+          webpackConfig: compilation.options,
+          htmlWebpackPlugin: {
+            files: assets,
+            options: Object.assign({}, options, sysConfig)
+          },
+          process,
+        };
+      },
       template: path.resolve(__dirname, '../src/index.html'),
       minify: {
         collapseWhitespace: true,
@@ -148,6 +148,12 @@ let rendererConfig = {
         ? path.resolve(__dirname, '../node_modules')
         : false
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../src/js'),
+        to: path.join(__dirname, '../dist/electron/js')
+      }
+    ]),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
