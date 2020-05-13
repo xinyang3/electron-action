@@ -111,9 +111,9 @@
       "oneClick": false,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
-      "installerIcon": "./build/icons/installer-qq.ico",
-      "uninstallerIcon": "./build/icons/uninstaller.ico",
-      "installerHeaderIcon": "./build/icons/installer-apc.ico",
+      "installerIcon": "./static/icons/installer-qq.ico",
+      "uninstallerIcon": "./static/icons/uninstaller.ico",
+      "installerHeaderIcon": "./static/icons/installer-apc.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "chat"
@@ -137,10 +137,10 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "static/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/installer-apc.ico",
+      "icon": "static/icons/installer-apc.ico",
       "target": [{
         "target": "nsis",
         "arch": [
@@ -150,7 +150,7 @@
       }]
     },
     "linux": {
-      "icon": "build/icons/icon.ico"
+      "icon": "static/icons/icon.ico"
     }
   }
 }
