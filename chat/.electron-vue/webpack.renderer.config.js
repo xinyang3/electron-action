@@ -32,17 +32,17 @@ let rendererConfig = {
   ],
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        enforce: 'pre',
-        exclude: /node_modules/,
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            formatter: require('eslint-friendly-formatter')
-          }
-        }
-      },
+      // {
+      //   test: /\.(js|vue)$/,
+      //   enforce: 'pre',
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'eslint-loader',
+      //     options: {
+      //       formatter: require('eslint-friendly-formatter')
+      //     }
+      //   }
+      // },
       {
         test: /\.scss$/,
         use: ['vue-style-loader', 'css-loader', 'sass-loader']
@@ -150,8 +150,8 @@ let rendererConfig = {
     }),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '../src/js'),
-        to: path.join(__dirname, '../dist/electron/js')
+        from: path.join(__dirname, '../src/common'),
+        to: path.join(__dirname, '../dist/electron/common')
       }
     ]),
     new webpack.HotModuleReplacementPlugin(),
@@ -164,7 +164,11 @@ let rendererConfig = {
   },
   resolve: {
     alias: {
+      'root': path.join(__dirname, '../'),
       '@': path.join(__dirname, '../src/renderer'),
+      'src': path.join(__dirname, '../src/renderer'),
+      'store': path.join(__dirname, '../src/renderer/store'),
+      'components': path.join(__dirname, '../src/renderer/components'),
       'vue$': 'vue/dist/vue.esm.js'
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node']

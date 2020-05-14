@@ -5,9 +5,11 @@
  */
 
 const devConfig = {
-  port: 3000,
+  port: 3000, // 开发环境前端端口
   host: '127.0.0.1',
-  title: 'chat'
+  title: 'chat',
+  shost: '127.0.0.1', // server host
+  sport: 3200
 }
 
 module.exports = devConfig
