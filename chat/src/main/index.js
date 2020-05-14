@@ -16,7 +16,6 @@ const winURL = process.env.NODE_ENV === 'development'
   ? `http://${sysConfig.host}:${sysConfig.port}`
   : `file://${__dirname}/index.html`
 
-console.log(winURL)
 function createWindow () {
   /**
    * Initial window options
