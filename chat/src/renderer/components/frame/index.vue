@@ -9,15 +9,15 @@
 </template>
 <script>
 export default {
-  name: "frame",
+  name: 'frame',
   components: {
-    slideBar: () => import("./slideBar")
+    slideBar: () => import('./slideBar')
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {}
-};
+}
 </script>
 <style lang="scss" scoped>
 .main-container,

@@ -16,7 +16,7 @@
           <span>
             <i class="icon iconfont icon-biaoqing"></i>
           </span>
-          <span>
+          <span @click="openFile">
             <i class="icon iconfont icon-file"></i>
           </span>
           <span>
@@ -40,25 +40,31 @@
   </main>
 </template>
 <script>
-import { msgSend } from "src/request/chat";
+import { msgSend } from 'src/request/chat'
+import { getFile } from 'src/common/dialog-file'
 export default {
-  name: "mainContainer",
-  data() {
+  name: 'mainContainer',
+  data () {
     return {
       msglist: [],
-      message: ""
-    };
+      message: ''
+    }
   },
   methods: {
-    send() {
-      if (this.message === "") return;
+    send () {
+      if (this.message === '') return
       msgSend(this.message).then(data => {
-        this.msglist.push(...data);
-        this.message = "";
-      });
+        this.msglist.push(...data)
+        this.message = ''
+      })
+    },
+    openFile () {
+      getFile().then(result => {
+        console.log(result)
+      })
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .container-content {

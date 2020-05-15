@@ -33,7 +33,7 @@
 <script>
 import {userlistGet} from 'src/request/chat'
 export default {
-  name: "slidebar",
+  name: 'slidebar',
   data () {
     return {
       users: []
@@ -41,16 +41,16 @@ export default {
   },
   methods: {
     userListQuery () {
-     userlistGet().then(res => {
-       this.users = res.data.data.list || []
+      userlistGet().then(res => {
+        this.users = res.data.data.list || []
       })
     }
   },
   mounted () {
     this.userListQuery()
   }
-  
-};
+
+}
 </script>
 <style lang="scss" scoped>
   .menu {

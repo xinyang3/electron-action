@@ -6,11 +6,11 @@
 
 <script>
 export default {
-  name: "chat",
+  name: 'chat',
   components: {
-    frame: () => import("src/components/frame")
+    frame: () => import('src/components/frame')
   }
-};
+}
 </script>
 
 <style>
