@@ -17,16 +17,16 @@
 </template>
 <script>
 export default {
-  name: "slidebar",
-  data() {
-    return {};
+  name: 'slidebar',
+  data () {
+    return {}
   },
   methods: {
-    toPage(rname = "") {
-      this.$router.push({ name: rname });
+    toPage (rname = '') {
+      this.$router.push({ name: rname })
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .bar {

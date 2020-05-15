@@ -5,6 +5,6 @@
 </template>
 <script>
 export default {
-  name: "concate"
-};
+  name: 'concate'
+}
 </script>

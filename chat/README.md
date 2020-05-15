@@ -2,6 +2,12 @@
 
 > electron-vue chat video
 
+### description
+> 模拟企业微信实现桌面应用
+> 使用electron-vue架构搭建
+> 打包工具webpack生成前端压缩文件,使用webpack-dev-server构建开发环境
+> electron-builder生成桌面应用压缩包和安装包
+
 #### Build Setup
 
 ``` bash
@@ -26,3 +32,25 @@ npm run lint
 ---
 
 This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+
+### structure
+> ├─ .electron 打包和开发环境构建脚本和配置文件
+> ├─ build 打包路径
+> ├─ dist 源码打包路径
+> ├─ static 整个项目静态资源
+> ├─ src 源码
+> ├──  common index.html 初始化加载文件
+> ├──  main 开发和生产环境 入口文件
+> ├──  render vue页面根路径
+> ├────  assets 资源
+> ├────  comnon 渲染进程交互主进程 
+> ├────  components
+> ├────  plugins
+> ├────  request
+> ├────  router
+> ├────  store
+> ├────  views
+> ├─ test 测试
+> ├─ package.json
+> ├─ config-sys.js 系统配置
+> ├─ eslint.js eslint配置
