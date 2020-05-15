@@ -8,7 +8,7 @@ import Axios from 'axios'
 import configSys from 'root/config-sys'
 
 const axios = Axios.create({
-  baseURL: `http://${configSys.shost}:${configSys.sport}`,
+  baseURL: `http://${configSys.shost}:${configSys.sport}/api`,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
   }
@@ -17,7 +17,7 @@ const axios = Axios.create({
 export { axios as request }
 
 export default {
-  use (Vue) {
+  install (Vue) {
     Object.defineProperty(Vue.prototype, '$http', axios)
   }
 }

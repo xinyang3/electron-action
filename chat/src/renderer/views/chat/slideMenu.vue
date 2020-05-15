@@ -2,16 +2,18 @@
   <section class="menu">
     <header>
       <div class="input">
-        <input class="search" placeholder="搜索">
+        <div>
           <i class="icon iconfont icon-search"></i>
-        </input>
+            <input class="search" placeholder="搜索">
+          </input>
+        </div>
       </div>
 
       <!-- <i class="icon iconfont icon-plus"></i> -->
     </header>
     <section class="user-list">
       <ul>
-        <li v-for="i in [1, 2, 3, 4, 5, 6]">
+        <li v-for="user in users">
           <div class="content">
             <p class="user">
               <svg class="icon" aria-hidden="true">
@@ -19,8 +21,8 @@
             </svg>
             </p>
             <p class="info">
-              <span class="name">esas mca</span><br>
-              <span class="msg">whatever you know</span>
+              <span class="name">{{user.name}}</span><br>
+              <span class="msg">{{user.msg}}</span>
             </p>
           </div>
         </li>
@@ -29,18 +31,36 @@
   </section>
 </template>
 <script>
+import {userlistGet} from 'src/request/chat'
 export default {
-  name: "slidebar"
+  name: "slidebar",
+  data () {
+    return {
+      users: []
+    }
+  },
+  methods: {
+    userListQuery () {
+     userlistGet().then(res => {
+       this.users = res.data.data.list || []
+      })
+    }
+  },
+  mounted () {
+    this.userListQuery()
+  }
+  
 };
 </script>
 <style lang="scss" scoped>
   .menu {
-    width: 16rem;
+    // width: 16rem;
     height: 100%;
-    position: relative;
-    left: 5rem;
+    float: left;
+    // position: relative;
+    // left: 5rem;
     border-right: 1px solid #e5d6f7;
-    background-color: #fbfbfb;
+    background-color: #E6E8EB;
     width: 22rem;
   }
   .input {
@@ -49,7 +69,7 @@ export default {
   .search {
     height: 23px;
     border-radius: 3px;
-    background-color: #fafbfc;
+    background-color: #D4D6D9;
     border: 1px solid #e8dfdf;
     width: 17rem;
   }
@@ -69,9 +89,11 @@ export default {
   input::-webkit-input-placeholder:focus + i {
     display: none;
   }
-  // .user-list ul{
-  //   padding-left: 1.5rem;;
-  // }
+  .user-list {
+    overflow-y: auto;
+    max-height: calc(100% - 7.5rem);
+    // padding-left: 1.5rem;;
+  }
   .user-list li{
     // height: 4.2rem;
     // padding: 0.5rem 0;
@@ -93,7 +115,7 @@ export default {
     visibility: hidden;
   }
   .user-list li:hover {
-    background-color: #e5e6e7;
+    background-color: #C3C5C7;
   }
   .user-list .user {
     float: left;
@@ -104,7 +126,7 @@ export default {
   .user-list .info {
     float: left;
     width: 12rem;
-    padding: 0 1rem;
+    padding: 0 .5rem;
   }
   .info .name {
     font-size: 1.6rem;

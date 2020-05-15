@@ -1,11 +1,13 @@
 <template>
-  <frame />
+  <main>
+    <frame />
+  </main>
 </template>
 <script>
 export default {
   name: "home",
   components: {
-    frame: () => import("../components/frame")
+    frame: () => import("src/components/frame")
   }
 };
 </script>

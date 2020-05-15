@@ -11,13 +11,23 @@ export default new Router({
     //   component: () => import('../components/sys/LandingPage')
     // },
     {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/home')
+      path: '/chat',
+      name: 'chat',
+      component: () => import('../views/chat')
     },
     {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('../views/contacts')
+    },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: () => import('../views/home')
+    // },
+    {
       path: '*',
-      redirect: '/home'
+      redirect: '/chat'
     }
   ]
 })
