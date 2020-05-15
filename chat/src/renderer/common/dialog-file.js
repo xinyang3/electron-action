@@ -18,6 +18,7 @@ export function getFile () {
       'showHiddenFiles',
       'createDirectory']
   }).then(data => {
+    console.log(data)
     var path = data[0] // filepath
 
     fs.readFile(path, 'utf8', (data) => {

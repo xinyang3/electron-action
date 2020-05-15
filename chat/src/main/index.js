@@ -36,6 +36,7 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+  return mainWindow
 }
 
 app.on('ready', createWindow)
