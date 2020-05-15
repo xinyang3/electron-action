@@ -2,8 +2,8 @@
   <main class="main-container">
     <slide-bar></slide-bar>
     <section class="container">
-      <slide-menu></slide-menu>
-      <main-container></main-container>
+      <slot name="name"></slot>
+      <router-view></router-view>
     </section>
   </main>
 </template>
@@ -11,9 +11,7 @@
 export default {
   name: "frame",
   components: {
-    slideBar: () => import("./slideBar"),
-    slideMenu: () => import("./slideMenu"),
-    mainContainer: () => import("./mainContainer")
+    slideBar: () => import("./slideBar")
   },
   data() {
     return {};
@@ -25,5 +23,10 @@ export default {
 .main-container,
 .container {
   height: 100%;
+  position: relative;
+}
+.container {
+  left: 5rem;
+  position: relative;
 }
 </style>

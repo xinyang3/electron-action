@@ -5,10 +5,10 @@
     </header>
     <section class="settings">
       <ul>
-        <li class="set">
+        <li class="set" @click="toPage('chat')">
           <i class="icon iconfont icon-weixin"></i>
         </li>
-        <li class="set">
+        <li class="set" @click="toPage('contact')">
           <i class="icon iconfont icon-struct" style="font-size: 3.3rem"></i>
         </li>
       </ul>
@@ -20,6 +20,11 @@ export default {
   name: "slidebar",
   data() {
     return {};
+  },
+  methods: {
+    toPage(rname = "") {
+      this.$router.push({ name: rname });
+    }
   }
 };
 </script>
@@ -28,7 +33,7 @@ export default {
   height: 100%;
   width: 5rem;
   position: absolute;
-  background-color: #03c8f4;
+  background-color: #366cb3;
   header {
     text-align: center;
     height: 8rem;

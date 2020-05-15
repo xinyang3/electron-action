@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <frame />
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'chat'
+export default {
+  name: "chat",
+  components: {
+    frame: () => import("src/components/frame")
   }
+};
 </script>
 
 <style>
-  /* CSS */
+/* CSS */
 </style>

@@ -9,7 +9,7 @@ const devConfig = {
   host: '127.0.0.1',
   title: 'chat',
   shost: '127.0.0.1', // server host
-  sport: 3200
+  sport: 5000
 }
 
 module.exports = devConfig
