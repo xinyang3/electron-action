@@ -117,12 +117,15 @@
       "createStartMenuShortcut": true,
       "shortcutName": "chat"
     },
-    "publish": [{
-      "provider": "generic",
-      "url": "http://xxxxx/"
-    }],
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://xxxxx/"
+      }
+    ],
     "dmg": {
-      "contents": [{
+      "contents": [
+        {
           "x": 410,
           "y": 150,
           "type": "link",
@@ -140,13 +143,15 @@
     },
     "win": {
       "icon": "static/icons/installer-apc.ico",
-      "target": [{
-        "target": "nsis",
-        "arch": [
-          "ia32",
-          "x64"
-        ]
-      }]
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32",
+            "x64"
+          ]
+        }
+      ]
     },
     "linux": {
       "icon": "static/icons/icon.ico"
