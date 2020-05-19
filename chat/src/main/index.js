@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow } from 'electron'
 import sysConfig from '../../config-sys'
+import Window from './windows'
 
 /**
  * Set `__static` path to static files in production
@@ -10,36 +11,18 @@ import sysConfig from '../../config-sys'
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
+let mainWindow = {}
 
-let mainWindow
+function createWindow () {
+  return new Window({ winURL: winURL })
+}
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://${sysConfig.host}:${sysConfig.port}`
   : `file://${__dirname}/index.html`
 
-function createWindow () {
-  /**
-   * Initial window options
-   */
-  mainWindow = new BrowserWindow({
-    height: 620,
-    useContentSize: true,
-    width: 1000,
-    minWidth: 800,
-    minHeight: 600,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
-
-  mainWindow.loadURL(winURL)
-
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
-  return mainWindow
-}
-
-app.on('ready', createWindow)
+app.on('ready', function () {
+  return (mainWindow = createWindow().mainWindow)
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -52,3 +35,5 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+export { mainWindow }

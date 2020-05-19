@@ -15,3 +15,11 @@ export function msgSend (params) {
     }, 300)
   })
 }
+
+export function fileSendPost (params) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve()
+    }, 300)
+  })
+}

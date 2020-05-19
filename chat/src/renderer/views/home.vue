@@ -5,9 +5,9 @@
 </template>
 <script>
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    frame: () => import('src/components/frame')
+    frame: () => import("render/components/frame")
   }
-}
+};
 </script>

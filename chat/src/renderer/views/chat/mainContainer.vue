@@ -22,7 +22,7 @@
           <span>
             <i class="icon iconfont icon-picture"></i>
           </span>
-          <span>
+          <span @click="say">
             <i class="icon iconfont icon-phone2"></i>
           </span>
           <span>
@@ -40,14 +40,16 @@
   </main>
 </template>
 <script>
-import { msgSend } from "src/request/chat";
-import { getFile } from "src/common/dialog-file";
+import { msgSend } from "render/request/chat";
+import { getFile } from "render/tools/dialogFile";
+import { createWindow } from "render/tools/window";
 export default {
   name: "mainContainer",
   data() {
     return {
       msglist: [],
-      message: ""
+      message: "",
+      sayWindow: null
     };
   },
   methods: {
@@ -59,7 +61,14 @@ export default {
       });
     },
     openFile() {
-      getFile();
+      getFile().then(({ paths, filenames }) => {
+        this.msglist.push(filenames);
+      });
+    },
+    say() {
+      // if (!this.sayWindow) {
+      this.sayWindow = createWindow("pages/talk.html");
+      // }
     }
   }
 };
@@ -107,6 +116,8 @@ export default {
     padding: 1rem 2rem;
     height: calc(100% - 7rem);
     overflow-y: auto;
+    border: 0px solid #dcdee0;
+    border-width: 1px 0;
   }
   .msg-list-current {
     margin: 0.8rem 0;
