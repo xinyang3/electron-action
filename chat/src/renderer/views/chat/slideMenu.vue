@@ -31,7 +31,7 @@
   </section>
 </template>
 <script>
-import {userlistGet} from 'src/request/chat'
+import {userlistGet} from 'render/request/chat'
 export default {
   name: 'slidebar',
   data () {

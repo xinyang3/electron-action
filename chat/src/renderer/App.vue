@@ -8,7 +8,7 @@
 export default {
   name: 'chat',
   components: {
-    frame: () => import('src/components/frame')
+    frame: () => import('render/components/frame')
   }
 }
 </script>

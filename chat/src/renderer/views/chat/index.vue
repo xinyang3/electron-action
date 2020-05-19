@@ -6,13 +6,13 @@
 </template>
 <script>
 export default {
-  name: 'chat',
+  name: "chat",
   components: {
-    frame: () => import('src/components/frame'),
-    slideMenu: () => import('./slideMenu'),
-    mainContainer: () => import('./mainContainer')
+    frame: () => import("render/components/frame"),
+    slideMenu: () => import("./slideMenu"),
+    mainContainer: () => import("./mainContainer")
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .chat {
