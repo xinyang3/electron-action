@@ -11,12 +11,15 @@ export function createWindow (paths = '') {
   const { BrowserWindow } = require('electron').remote
   var paths = path.resolve(__dirname, '../', paths)
   let window = new BrowserWindow({
-    width: 500,
-    height: 600,
+    width: 650,
+    height: 500,
     transparent: false,
-    resizable: false,
+    resizable: true,
     fullscreenable: true,
-    title: '语音通话'
+    title: '语音通话',
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
   window.loadURL(`file://${paths}`)
   window.on('close', () => {

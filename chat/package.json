@@ -23,14 +23,17 @@
     "unit": "karma start test/unit/karma.conf.js"
   },
   "dependencies": {
-    "vue": "^2.5.16",
+    "agora-electron-sdk": "^3.0.0-build.473",
     "axios": "^0.18.0",
+    "electron": "^9.0.0",
+    "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-electron": "^1.0.0"
   },
   "devDependencies": {
+    "agora-rtc-sdk": "^3.1.0",
     "ajv": "^6.5.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -49,7 +52,6 @@
     "css-loader": "^0.28.11",
     "del": "^3.0.0",
     "devtron": "^1.4.0",
-    "electron": "^8.3.0",
     "electron-builder": "^22.6.0",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",

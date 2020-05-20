@@ -20,7 +20,7 @@ class Window {
     }, options)
     this.options = options
     this.mainWindow = new BrowserWindow(options)
-    Window.init()
+    this.init(this.mainWindow)
   }
 
   init (window) {
