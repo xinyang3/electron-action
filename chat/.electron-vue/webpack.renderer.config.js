@@ -12,6 +12,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const sysConfig = require('../config-sys')
+const env = require('./env')
 
 /**
  * List of node_modules to include in webpack bundle
@@ -154,6 +155,10 @@ let rendererConfig = {
         to: path.join(__dirname, '../dist/electron/common')
       }
     ]),
+    new webpack.DefinePlugin({
+      'process.env.AGORA_APPID': env.AGORA_APPID,
+      'process.env.AGORA_LOG_PATH': env.AGORA_LOG_PATH
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
@@ -184,7 +189,8 @@ let rendererConfig = {
 if (process.env.NODE_ENV !== 'production') {
   rendererConfig.plugins.push(
     new webpack.DefinePlugin({
-      '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
+      '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`,
+
     })
   )
 }
@@ -205,7 +211,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     ]),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true

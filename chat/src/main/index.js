@@ -13,12 +13,13 @@ if (process.env.NODE_ENV !== 'development') {
 }
 let mainWindow = {}
 
-function createWindow () {
-  return new Window({ winURL: winURL })
-}
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://${sysConfig.host}:${sysConfig.port}`
   : `file://${__dirname}/index.html`
+
+function createWindow () {
+  return new Window({ winURL: winURL })
+}
 
 app.on('ready', function () {
   return (mainWindow = createWindow().mainWindow)
