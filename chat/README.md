@@ -39,9 +39,10 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 > ├─ dist 源码打包路径  
 > ├─ static 整个项目静态资源  
 > ├─ src 源码  
-> ├──  common index.html 初始化加载文件  
+> ├──  resource index.html 渲染页面共有资源文件  
 > ├──  main 开发和生产环境 入口文件  
-> ├──  render vue页面根路径  
+> ├──  renders 渲染页面资源    
+> ├──  renderer vue页面根路径  
 > ├────  assets 资源  
 > ├────  comnon 渲染进程交互主进程  
 > ├────  components  

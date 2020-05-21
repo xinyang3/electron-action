@@ -151,8 +151,12 @@ let rendererConfig = {
     }),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '../src/common'),
-        to: path.join(__dirname, '../dist/electron/common')
+        from: path.join(__dirname, '../src/resource'), // 渲染进程共有的资源
+        to: path.join(__dirname, '../dist/electron/resource')
+      },
+      {
+        from: path.join(__dirname, '../src/renders'), // 除了vue渲染进程外其他的渲染页面
+        to: path.join(__dirname, '../dist/electron/renders')
       }
     ]),
     new webpack.DefinePlugin({

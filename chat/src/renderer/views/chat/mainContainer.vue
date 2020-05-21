@@ -75,8 +75,9 @@
         });
       },
       say() {
+        this.sayWindow = createWindow("talk/index.html");
         // if (!this.sayWindow) {
-        this.sayWindow = createWindow("sections/talk/index.html");
+        // this.sayWindow = createWindow("renders/talk/index.html");
         // }
       }
     }
