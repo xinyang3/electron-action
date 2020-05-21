@@ -3,11 +3,15 @@
  * @author xinyang3
  * @date 2020/5/20
 */
-const AgoraRtcEngine = require('agora-electron-sdk')
+console.log(navigator)
+// agora-electron-sdk 在node环境下可用此时引用 navigator is not defined
+const AgoraRtcEngine = require('electron').remote.require('agora-electron-sdk')
 const path = require('path')
 const os = require('os');
 
-const logpath = process.env.AGORA_LOG_PATH, APPID = process.env.AGORA_APPID
+const logpath = process.env.AGORA_LOG_PATH || '/agora_logs/agora.log',
+  APPID = process.env.AGORA_APPID || 'f69b4c38a32d436aa1c5c0ebf3eecc32'
+
 
 function Enginer (options = {}) {
   let enginer = {};

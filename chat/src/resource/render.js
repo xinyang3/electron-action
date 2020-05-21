@@ -5,6 +5,9 @@
  */
 
 (function () {
+  // const path = require('path')
+  // require.globalPaths(path.resolve(__dirname, '../renders/plugins'), path.resolve(__dirname, '../renders/plugins'))
+
   if (process.env.NODE_ENV === 'development') {
     require('module').globalPaths.push("<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, '\\\\') %>")
   } else {

@@ -4,12 +4,16 @@
  * @date 2020/5/15
  */
 // import { main } from 'src/main'
-import path from 'path'
-// import { mainWindow } from 'main/index'
+import path from 'path';
+import sysConfig from '../../../config-sys'
+
+const winURL = process.env.NODE_ENV === 'development'
+  ? `http://${sysConfig.host}:${sysConfig.port}`
+  : `file://${__dirname}/index.html`
 
 export function createWindow (paths = '') {
   const { BrowserWindow } = require('electron').remote
-  var paths = path.resolve(__dirname, '../', paths)
+  var paths = path.resolve(__dirname, '../../renders', paths)
   let window = new BrowserWindow({
     width: 650,
     height: 500,
@@ -18,7 +22,8 @@ export function createWindow (paths = '') {
     fullscreenable: true,
     title: '语音通话',
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      nodeIntegrationInSubFrame: true
     }
   })
   window.loadURL(`file://${paths}`)
