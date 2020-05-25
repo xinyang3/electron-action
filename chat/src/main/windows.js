@@ -12,6 +12,7 @@ class Window {
       height: 620,
       useContentSize: true,
       width: 1000,
+      frame: false,
       minWidth: 800,
       minHeight: 600,
       webPreferences: {
@@ -25,6 +26,7 @@ class Window {
 
   init (window) {
     window.loadURL(this.options.winURL)
+    window.webContents.openDevTools()
     window.once('ready-to-show', function () {
       window.show()
     })
@@ -32,6 +34,8 @@ class Window {
     window.on('closed', () => {
       window = null
     })
+    window.on('close', function () {
+    });
   }
 
   destroy () {

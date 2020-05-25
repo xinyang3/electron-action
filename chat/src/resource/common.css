@@ -1,0 +1,25 @@
+body {
+  position: relative;
+}
+
+.drag {
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.operate-menu {
+  position: absolute;
+  top: 1rem;
+  right: .5rem;
+}
+
+.operate-menu span {
+  margin: 0 1rem;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 10;
+}
