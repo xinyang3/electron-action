@@ -6,6 +6,27 @@
   "description": "微信-demo",
   "glyphs": [
     {
+      "icon_id": "428403",
+      "name": "最大化",
+      "font_class": "max",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "1649166",
+      "name": "最小化",
+      "font_class": "min",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "14313162",
+      "name": "关闭",
+      "font_class": "close",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
       "icon_id": "9297219",
       "name": "视频",
       "font_class": "shipin",

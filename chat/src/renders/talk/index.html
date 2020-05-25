@@ -2,29 +2,36 @@
 
 <head>
   <title>video talking</title>
-  <style type="text/css" href="./style.css"></style>
+  <link rel="stylesheet" href="../../resource/base.css">
+  </link>
+  <link rel="stylesheet" href="../../resource/iconfont/iconfont.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  </style>
 </head>
-<style type="text/css">
-  /* .video {
-    width: 120px;
-    height: 120px;
-    overflow: hidden;
-  } */
-</style>
 
-<body>
-  <div class="video-grid" id="video">
-    <div class="video-view">
-      <div id="local_stream" class="video-placeholder"></div>
-      <div id="local_video_info" class="video-profile hide"></div>
-      <div id="video_autoplay_local" class="autoplay-fallback hide"></div>
-
-      <!-- <div class="video" id="local"></div>
-      <div class="video" id="remote"></div> -->
+<body class="drag">
+  <header class="operate-menu">
+    <span><i id="min" class="min icon iconfont icon-min no-drag"></i></span>
+    <!-- <span><i id="max" class="max icon iconfont icon-max"></i></span> -->
+    <span><i id="close" class="close icon iconfont icon-close no-drag"></i></span>
+  </header>
+  <section class="agora-theme">
+    <div class="video-grid" id="video">
+      <div class="video-view">
+        <div id="local_stream" class="video-placeholder">
+          <footer class="menu_bar">
+            <button class="btn hang">挂断</button>
+          </footer>
+        </div>
+        <div id="local_video_info" class="video-profile hide"></div>
+        <div id="video_autoplay_local" class="autoplay-fallback hide"></div>
+        <!-- <div class="video" id="local"></div>
+        <div class="video" id="remote"></div> -->
+      </div>
     </div>
-  </div>
-  <!-- <script src="../../resource/render.js"></script> -->
-  <!-- <script src="./jquery-3.5.1.min.js"></script> -->
+  </section>
+  <script src="../../resource/render.js"></script>
   <script src='./index-web.js'></script>
 </body>
 

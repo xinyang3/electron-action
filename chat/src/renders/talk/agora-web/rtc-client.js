@@ -1,5 +1,4 @@
 const AgoraRTC = require('agora-rtc-sdk')
-// import { addView, removeView } from './common'
 const opera = require('./common')
 const addView = opera.addView; removeView = opera.removeView;
 
@@ -154,8 +153,8 @@ class RTCClient {
             audio: true,
             video: true,
             screen: false,
-            microphoneId: data.microphoneId,
-            cameraId: data.cameraId
+            // microphoneId: data.microphoneId,
+            // cameraId: data.cameraId
           })
 
           this._localStream.on('player-status-change', (evt) => {
@@ -172,8 +171,8 @@ class RTCClient {
             console.log('init local stream success')
             // play stream with html element id "local_stream"
             this._localStream.play('local_stream', { fit: 'cover' })
-
             // run callback
+            opera.showMenu()
             resolve()
           }, (err) => {
             consoleErr(`client init failed 1 , \n`, err)

@@ -1,7 +1,7 @@
 <template>
   <main class="container-content">
     <section class="contents">
-      <header class="head">
+      <header class="head drag">
         <span>somename</span>
       </header>
       <div class="msg-area">
@@ -75,7 +75,7 @@
         });
       },
       say() {
-        this.sayWindow = createWindow("talk/index.html");
+        this.sayWindow = createWindow("renders/talk/index.html");
         // if (!this.sayWindow) {
         // this.sayWindow = createWindow("renders/talk/index.html");
         // }

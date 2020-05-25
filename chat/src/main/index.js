@@ -3,6 +3,7 @@
 import { app, BrowserWindow } from 'electron'
 import sysConfig from '../../config-sys'
 import Window from './windows'
+import './ipcmain'
 
 /**
  * Set `__static` path to static files in production

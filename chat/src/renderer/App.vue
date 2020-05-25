@@ -5,14 +5,14 @@
 </template>
 
 <script>
-export default {
-  name: 'chat',
-  components: {
-    frame: () => import('render/components/frame')
+  export default {
+    name: 'chat',
+    components: {
+      frame: () => import('render/components/frame')
+    }
   }
-}
 </script>
 
 <style>
-/* CSS */
+  /* CSS */
 </style>
