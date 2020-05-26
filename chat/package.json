@@ -24,7 +24,10 @@
   },
   "dependencies": {
     "agora-electron-sdk": "^3.0.0-build.473",
+    "agora-rtc-sdk": "^3.1.0",
     "axios": "^0.18.0",
+    "element-ui": "^2.13.2",
+    "jquery": "^3.5.1",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",
@@ -32,7 +35,6 @@
     "vuex-electron": "^1.0.0"
   },
   "devDependencies": {
-    "agora-rtc-sdk": "^3.1.0",
     "ajv": "^6.5.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -68,7 +70,6 @@
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "inject-loader": "^4.0.1",
-    "jquery": "^3.5.1",
     "karma": "^2.0.2",
     "karma-chai": "^0.1.0",
     "karma-coverage": "^1.1.2",
@@ -120,12 +121,15 @@
       "createStartMenuShortcut": true,
       "shortcutName": "chat"
     },
-    "publish": [{
-      "provider": "generic",
-      "url": "http://xxxxx/"
-    }],
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://xxxxx/"
+      }
+    ],
     "dmg": {
-      "contents": [{
+      "contents": [
+        {
           "x": 410,
           "y": 150,
           "type": "link",
@@ -143,13 +147,15 @@
     },
     "win": {
       "icon": "static/icons/installer-apc.ico",
-      "target": [{
-        "target": "nsis",
-        "arch": [
-          "ia32",
-          "x64"
-        ]
-      }]
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32",
+            "x64"
+          ]
+        }
+      ]
     },
     "linux": {
       "icon": "static/icons/icon.ico"

@@ -1,0 +1,118 @@
+body {
+  position: relative;
+  background-color: #FAFAFA;
+}
+
+.drag {
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.header {
+  border: 1px solid #DDE2E6;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+.operate-menu {
+  position: absolute;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: right;
+  right: 5px;
+  top: 5px;
+}
+
+.operate-menu span {
+  margin: 0 1rem;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.operate-menu span i {
+  font-size: 12px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 45px);
+}
+
+.users,
+.users-cf {
+  width: 50%;
+  height: 100%;
+  border: 1px solid #DDE2E6;
+  border-width: 0 1px;
+}
+
+.search {
+  padding: 1.5rem;
+}
+
+.search .el-input.el-input-group {
+  font-size: 12px;
+  height: 30px;
+}
+
+.el-input__inner {
+  height: 30px;
+  line-height: 30px;
+}
+
+.contents {
+  font-size: 14px;
+  max-height: calc(100% - 61px);
+  overflow-y: auto;
+}
+
+.contents .list {
+  padding: 1rem;
+}
+
+.contents .item {
+  padding: 1rem 0.5rem;
+  line-height: 20px;
+  height: 20px;
+  vertical-align: bottom;
+  cursor: pointer;
+}
+
+.contents .item .name {
+  margin-left: 1rem;
+}
+
+.contents .item label.el-checkbox {
+  /* float: right; */
+  display: inline-block;
+  width: 92%;
+  vertical-align: sub;
+}
+
+.contents .item label .el-checkbox__input {
+  float: right;
+}
+
+.item label .el-checkbox__label {
+  float: left;
+}
+
+.users-cf .contents {
+  height: calc(100% - 2rem);
+}
+
+.users-cf .btn-area {
+  height: 4rem;
+  float: right;
+  margin-top: 1rem;
+  margin-right: 2rem;
+}

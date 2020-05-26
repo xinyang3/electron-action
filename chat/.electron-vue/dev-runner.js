@@ -11,7 +11,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
-const sysConfig = require('../config-sys')
+const sysConfig = require('../static/config-sys')
 
 let electronProcess = null
 let manualRestart = false

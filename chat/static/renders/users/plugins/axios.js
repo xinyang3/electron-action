@@ -1,11 +1,10 @@
-/**
- * @description axios 处理
+/** 
+ * @description axios common js 
  * @author xinyang3
- * @date 2020/5/13
- */
-
-import Axios from 'axios'
-import configSys from 'static/config-sys'
+ * @date 2020/5/26
+*/
+const Axios = require('axios')
+const configSys = require('../../../config-sys')
 
 const axios = Axios.create({
   baseURL: `http://${configSys.shost}:${configSys.sport}/api`,
@@ -14,9 +13,8 @@ const axios = Axios.create({
   }
 })
 
-export { axios as request }
-
-export default {
+module.exports = {
+  request: axios,
   install (Vue) {
     Object.defineProperty(Vue.prototype, '$http', axios)
   }

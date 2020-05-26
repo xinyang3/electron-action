@@ -26,9 +26,11 @@ class Window {
 
   init (window) {
     window.loadURL(this.options.winURL)
-    window.webContents.openDevTools()
     window.once('ready-to-show', function () {
       window.show()
+      if (process.env.NODE_ENV === 'development') {
+        window.webContents.openDevTools()
+      }
     })
 
     window.on('closed', () => {

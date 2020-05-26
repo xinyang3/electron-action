@@ -22,3 +22,12 @@ ipcRenderer.on('render-window-close', (e, args) => {
     console.warn('browser-wnndow is closed')
   }
 })
+
+/**渲染进程注册事件 */
+module.exports.renderRegisterEvent = function (name, cb) {
+  if (!name || !cb) {
+    return (console.warn(`arguments is not collectly`))
+  }
+  ipcRenderer.on(name, cb)
+  console.warn(`ipcrenderer registered a event ${name}`)
+}

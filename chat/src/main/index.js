@@ -1,7 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
-import sysConfig from '../../config-sys'
+import sysConfig from '../../static/config-sys'
 import Window from './windows'
 import './ipcmain'
 

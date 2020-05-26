@@ -6,6 +6,13 @@
   "description": "微信-demo",
   "glyphs": [
     {
+      "icon_id": "1363825",
+      "name": "plus",
+      "font_class": "plus1",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
       "icon_id": "428403",
       "name": "最大化",
       "font_class": "max",
