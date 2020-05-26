@@ -139,7 +139,7 @@ let rendererConfig = {
           process,
         };
       },
-      template: path.resolve(__dirname, '../src/index.html'),
+      template: path.resolve(__dirname, '../src/index.ejs'),
       minify: {
         collapseWhitespace: true,
         removeAttributeQuotes: true,
@@ -149,16 +149,16 @@ let rendererConfig = {
         ? path.resolve(__dirname, '../node_modules')
         : false
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../src/resource'), // 渲染进程共有的资源
-        to: path.join(__dirname, '../dist/electron/resource')
-      },
-      {
-        from: path.join(__dirname, '../src/renders'), // 除了vue渲染进程外其他的渲染页面
-        to: path.join(__dirname, '../dist/electron/renders')
-      }
-    ]),
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: path.join(__dirname, '../src/resource'), // 渲染进程共有的资源
+    //     to: path.join(__dirname, '../dist/electron/resource')
+    //   },
+    //   {
+    //     from: path.join(__dirname, '../src/renders'), // 除了vue渲染进程外其他的渲染页面
+    //     to: path.join(__dirname, '../dist/electron/renders')
+    //   }
+    // ]),
     new webpack.DefinePlugin({
       'process.env.AGORA_APPID': env.AGORA_APPID,
       'process.env.AGORA_LOG_PATH': env.AGORA_LOG_PATH
@@ -175,6 +175,7 @@ let rendererConfig = {
     alias: {
       'root': path.join(__dirname, '../'),
       'render': path.join(__dirname, '../src/renderer'),
+      'static': path.resolve(__dirname, '../static'),
       'main': path.join(__dirname, '../src/main'),
       '@': path.join(__dirname, '../src/renderer'),
       'src': path.join(__dirname, '../src'),

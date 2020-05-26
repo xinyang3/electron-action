@@ -96,7 +96,7 @@ let webConfig = {
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, '../src/index.html'),
+      template: path.resolve(__dirname, '../src/index.ejs'),
       templateParameters (compilation, assets, options) {
         return {
           compilation: compilation,
@@ -129,6 +129,7 @@ let webConfig = {
   resolve: {
     alias: {
       '@': path.join(__dirname, '../src/renderer'),
+      'static': path.resolve(__dirname, '../static'),
       'vue$': 'vue/dist/vue.esm.js'
     },
     extensions: ['.js', '.vue', '.json', '.css']
@@ -150,10 +151,10 @@ if (process.env.NODE_ENV === 'production') {
         to: path.join(__dirname, '../dist/web/static'),
         ignore: ['.*']
       },
-      {
-        from: path.join(__dirname, '../src/js'),
-        to: path.join(__dirname, '../dist/electron/static')
-      }
+      // {
+      //   from: path.join(__dirname, '../src/js'),
+      //   to: path.join(__dirname, '../dist/electron/static')
+      // }
     ]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
