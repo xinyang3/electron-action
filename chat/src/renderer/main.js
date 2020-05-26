@@ -6,8 +6,8 @@ import store from './store'
 import axios from './plugins/axios'
 import './assets/css/common.css'
 // import './assets/iconfont/iconfont.js'
-import 'src/resource/js/ipcRender'
-import 'src/resource/js/window-opera'
+import 'static/resource/js/ipcRender'
+import 'static/resource/js/window-opera'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 

@@ -75,7 +75,12 @@
         });
       },
       say() {
-        this.sayWindow = createWindow("renders/talk/index.html");
+        this.sayWindow = createWindow({
+          width: 400,
+          height: 600,
+          title: '语音通话',
+          file: "renders/talk/index.html"
+        });
         // if (!this.sayWindow) {
         // this.sayWindow = createWindow("renders/talk/index.html");
         // }

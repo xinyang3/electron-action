@@ -5,29 +5,23 @@
  */
 // import { main } from 'src/main'
 import path from 'path';
-import sysConfig from '../../../config-sys'
 
-// const winURL = process.env.NODE_ENV === 'development'
-//   ? `http://${sysConfig.host}:${sysConfig.port}`
-//   : `file://${__dirname}/index.html`
-
-export function createWindow (paths = '') {
+export function createWindow (option) {
   const { BrowserWindow } = require('electron').remote
-  var paths = path.resolve(__dirname, '../../', paths)
-  let window = new BrowserWindow({
+  var paths = path.resolve(__static, option.file)
+  var options = Object.assign({}, {
     width: 400,
     height: 600,
     transparent: false,
-    resizable: true,
     frame: false,
     resizable: false,
     fullscreenable: true,
-    title: '语音通话',
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInSubFrame: true
     }
-  })
+  }, option)
+  let window = new BrowserWindow(options)
   window.loadURL(`file://${paths}`)
   window.on('close', () => {
     window = null
