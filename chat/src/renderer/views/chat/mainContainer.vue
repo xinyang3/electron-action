@@ -78,6 +78,7 @@
         this.sayWindow = createWindow({
           width: 400,
           height: 600,
+          modal: true,
           title: '语音通话',
           file: "renders/talk/index.html"
         });
