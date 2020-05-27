@@ -6,6 +6,34 @@
   "description": "微信-demo",
   "glyphs": [
     {
+      "icon_id": "6664141",
+      "name": "clock",
+      "font_class": "clock2",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "14629145",
+      "name": "clock",
+      "font_class": "clock1",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "139576",
+      "name": "时间时钟",
+      "font_class": "clock",
+      "unicode": "e6d3",
+      "unicode_decimal": 59091
+    },
+    {
+      "icon_id": "7423948",
+      "name": "群聊",
+      "font_class": "qunliao",
+      "unicode": "e6f8",
+      "unicode_decimal": 59128
+    },
+    {
       "icon_id": "1363825",
       "name": "plus",
       "font_class": "plus1",

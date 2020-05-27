@@ -13,13 +13,17 @@ body {
 
 .operate-menu {
   position: absolute;
-  top: 1rem;
+  top: .6rem;
   right: .5rem;
 }
 
 .operate-menu span {
-  margin: 0 1rem;
+  margin: 0 .6rem;
   cursor: pointer;
   pointer-events: auto;
   z-index: 10;
+}
+
+.operate-menu span i {
+  font-size: 14px;
 }
