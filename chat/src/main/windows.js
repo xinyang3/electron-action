@@ -9,12 +9,12 @@ import { BrowserWindow } from 'electron'
 class Window {
   constructor(options) {
     options = Object.assign({}, {
-      height: 620,
+      height: 645,
       useContentSize: true,
-      width: 1000,
+      width: 1100,
       frame: false,
-      minWidth: 800,
-      minHeight: 600,
+      minWidth: 920,
+      minHeight: 645,
       webPreferences: {
         nodeIntegration: true
       }

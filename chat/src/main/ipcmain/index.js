@@ -13,14 +13,14 @@ ipcMain.on('window-max', (e, { browserId }) => {
   } else {
     bw.maximize();
   }
+  bw.webContents.send('render-window-max', 'window size is reset')
 })
 
 ipcMain.on('window-min', (e, { browserId }) => {
   BrowserWindow.fromId(browserId).minimize()
+
 })
 
 ipcMain.on('window-close', (e, { browserId }) => {
-  debugger
-  console.log(browserId)
   BrowserWindow.fromId(browserId).close()
 })

@@ -14,11 +14,12 @@
     </header>
     <section class="user-list">
       <ul>
-        <li v-for="user in users">
+        <li v-for="user in users" @click="userChange(user)">
           <div class="content">
             <p class="user">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-girl-two"></use>
+              <i class="img-group icon iconfont icon-qunliao" v-if="user.group"></i>
+              <svg class="icon" aria-hidden="true" v-else>
+                <use :xlink:href="user.icon"></use>
               </svg>
             </p>
             <p class="info">
@@ -43,17 +44,13 @@
   } from 'static/resource/js/ipcRender'
   export default {
     name: 'slidebar',
+    inject: ['root'],
     data() {
       return {
         users: []
       }
     },
-    created() {
-      renderRegisterEvent('users-confirm', function (e, data) {
-        debugger
-        console.log(data)
-      })
-    },
+    created() {},
     methods: {
       userListQuery() {
         userlistGet().then(res => {
@@ -72,6 +69,33 @@
           parent: require('electron').remote.getCurrentWindow(),
           file: 'renders/users/index.html'
         })
+        let users = this.users;
+        // 注册渲染进程确认和取消的事件
+        renderRegisterEvent('users-confirm', (e, {
+          cid,
+          data,
+        }) => {
+          users.unshift({
+            group: true,
+            name: data.join(','),
+            msg: `${data.length} is talking in the meeting ...`
+          })
+          require('electron').ipcRenderer.send('window-close', {
+            browserId: cid
+          })
+        })
+        renderRegisterEvent('users-cancel', (e, {
+          cid,
+          data,
+          callback
+        }) => {
+          require('electron').ipcRenderer.send('window-close', {
+            browserId: cid
+          })
+        })
+      },
+      userChange(user = {}) {
+        this.root.userChange(user)
       }
     },
     mounted() {
@@ -150,7 +174,7 @@
 
   .user-list .content {
     border-bottom: 1px solid #e5d6f7;
-    padding: .6rem;
+    padding: 1rem;
   }
 
   .user-list .content::after {
@@ -170,23 +194,27 @@
     float: left;
     width: 4rem;
     height: 4rem;
-    padding: 0.25rem 0;
+    text-align: center;
+    /* padding: 0.25rem 0; */
   }
 
   .user-list .info {
     float: left;
     width: 12rem;
     padding: 0 .5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .info .name {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #0a0a0a;
   }
 
   .info .msg {
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: .6rem;
     font-size: 1.2rem;
     color: #a1a2a2;
   }
@@ -194,5 +222,10 @@
   .user svg {
     width: 100%;
     height: 100%;
+  }
+
+  .user .img-group {
+    font-size: 30px;
+    color: #A0D9F6;
   }
 </style>
