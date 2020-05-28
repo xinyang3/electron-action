@@ -20,9 +20,14 @@ npm run dev
 # build electron application for production
 npm run build
 
+# mock data address 
+git clone https://github.com/xinyang3/mockjs-server  
+cd mockjs-server  
+npm i  
+npm run mock  
+
 # run unit & end-to-end tests
 npm test
-
 
 # lint all JS/Vue component files in `src/`
 npm run lint
@@ -37,11 +42,14 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 > ├─ .electron 打包和开发环境构建脚本和配置文件  
 > ├─ build 打包路径  
 > ├─ dist 源码打包路径  
-> ├─ static 整个项目静态资源  
+> ├─ static 整个项目静态资源 
+> ├──  renders 打开的窗口渲染页面 
+> ├──  resource 窗口渲染页面共有资源 
+> ├──  iocns 打包用资源文件  
+> ├──  config-sys.js 系统配置  
 > ├─ src 源码  
 > ├──  resource index.html 渲染页面共有资源文件  
 > ├──  main 开发和生产环境 入口文件  
-> ├──  renders 渲染页面资源    
 > ├──  renderer vue页面根路径  
 > ├────  assets 资源  
 > ├────  comnon 渲染进程交互主进程  
@@ -53,5 +61,4 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 > ├────  views  
 > ├─ test 测试  
 > ├─ package.json  
-> ├─ config-sys.js 系统配置  
 > ├─ eslint.js eslint配置  
