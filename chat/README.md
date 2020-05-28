@@ -3,10 +3,10 @@
 > electron-vue chat video
 
 ### description
-> 模拟企业微信实现桌面应用
-> 使用electron-vue架构搭建
-> 打包工具webpack生成前端压缩文件,使用webpack-dev-server构建开发环境
-> electron-builder生成桌面应用压缩包和安装包
+> 模拟企业微信实现桌面应用  
+> 使用electron-vue架构搭建  
+> 打包工具webpack生成前端压缩文件,使用webpack-dev-server构建开发环境  
+> electron-builder生成桌面应用压缩包和安装包  
 
 #### Build Setup
 
@@ -42,11 +42,11 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 > ├─ .electron 打包和开发环境构建脚本和配置文件  
 > ├─ build 打包路径  
 > ├─ dist 源码打包路径  
-> ├─ static 整个项目静态资源 
-> ├──  renders 打开的窗口渲染页面 
-> ├──  resource 窗口渲染页面共有资源 
-> ├──  iocns 打包用资源文件  
-> ├──  config-sys.js 系统配置  
+> ├─ static 整个项目静态资源   
+> ├──  renders 打开的窗口渲染页面  
+> ├──  resource 窗口渲染页面共有资源  
+> ├──  iocns 打包用资源文件   
+> ├──  config-sys.js 系统配置    
 > ├─ src 源码  
 > ├──  resource index.html 渲染页面共有资源文件  
 > ├──  main 开发和生产环境 入口文件  
