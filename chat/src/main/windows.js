@@ -5,16 +5,18 @@
  */
 
 import { BrowserWindow } from 'electron'
+import logger from '../../static/resource/js/logger'
 
 class Window {
   constructor(options) {
     options = Object.assign({}, {
       height: 645,
       useContentSize: true,
-      width: 1100,
+      width: 1000,
       frame: false,
       minWidth: 920,
       minHeight: 645,
+      show: false,
       webPreferences: {
         nodeIntegration: true
       }
@@ -31,13 +33,13 @@ class Window {
       if (process.env.NODE_ENV === 'development') {
         window.webContents.openDevTools()
       }
+      logger.okLog(`render process ${window.id} is created !`)
     })
 
     window.on('closed', () => {
+      logger.warnLog('mainWindow is closed')
       window = null
     })
-    window.on('close', function () {
-    });
   }
 
   destroy () {

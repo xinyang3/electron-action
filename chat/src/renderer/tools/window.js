@@ -5,6 +5,8 @@
  */
 // import { main } from 'src/main'
 import path from 'path';
+import logger from 'static/resource/js/logger'
+import { ipcRender, ipcRenderer } from 'electron'
 
 export function createWindow (option) {
   const { BrowserWindow } = require('electron').remote
@@ -16,6 +18,7 @@ export function createWindow (option) {
     transparent: false,
     frame: false,
     resizable: false,
+    show: true,
     fullscreenable: true,
     closeable: true,
     webPreferences: {
@@ -24,15 +27,21 @@ export function createWindow (option) {
     }
   }, option)
   window = new BrowserWindow(options)
+  let bid = window.id;
+
   window.loadURL(`file://${paths}`)
-  window.on('close', () => {
-    window = null
+
+  if (process.env.NODE_ENV === 'development') {
+    window.webContents.openDevTools()
+  }
+  ipcRenderer.send('window-created', { browserId: bid })
+
+  window.on('shown', () => {
   })
-  window.once('ready-to-show', () => {
-    window.show()
-    if (process.env.NODE_ENV === 'development') {
-      window.webContents.openDevTools()
-    }
+
+  window.on('close', () => {
+    logger.debugLog(`render process ${bid} is closed !`)
+    window = null
   })
   return window
 }

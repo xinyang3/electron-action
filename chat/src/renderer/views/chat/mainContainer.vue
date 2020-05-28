@@ -93,7 +93,7 @@
           paths,
           filenames
         }) => {
-          this.msglist.push(filenames);
+          this.msglist.push(...filenames);
         });
       },
       say() {

@@ -78,7 +78,7 @@
           users.unshift({
             group: true,
             name: data.join(','),
-            msg: `${data.length} is talking in the meeting ...`
+            msg: `${data.length} person is talking in the meeting ...`
           })
           require('electron').ipcRenderer.send('window-close', {
             browserId: cid
