@@ -8,6 +8,12 @@ import path from 'path';
 import logger from 'static/resource/js/logger'
 import { ipcRender, ipcRenderer } from 'electron'
 
+/**
+ * @description 创建渲染窗口并加载文件
+ * @param {option} browserWindow options
+ * @author xinyang3
+ * @date 2020/5/28
+ */
 export function createWindow (option) {
   const { BrowserWindow } = require('electron').remote
   var paths = path.resolve(__static, option.file)
