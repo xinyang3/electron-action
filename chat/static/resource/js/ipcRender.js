@@ -33,11 +33,13 @@ module.exports.renderRegisterEvent = function (name, cb) {
     return (console.warn(`arguments is not collectly`))
   }
   if (ipcRenderer.eventNames().includes(name)) {
-    // 该事件已经注册过确认是否要重复注册
-    return (console.warn(`you have registered an event ${name}`))
+    // 监听器中已经注册过该事件
+    console.warn(`ipcrenderer listener channel exists the same event ${name}`)
+    // 移除所有该channel监听事件
+    ipcRenderer.removeAllListeners(name)
   }
   ipcRenderer.on(name, cb)
-  console.warn(`ipcrenderer registered a event ${name}`)
+  console.warn(`ipcrenderer has registered a event ${name}`)
 }
 
 /** 
@@ -52,4 +54,5 @@ module.exports.renderRemoveEvent = function (name, cb) {
   if (!ipcRenderer.eventNames().includes(name)) return
 
   ipcRenderer.removeListener(name, cb)
+  console.warn(`ipcrenderer has removed a event ${name}`)
 }

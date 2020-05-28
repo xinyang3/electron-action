@@ -95,7 +95,7 @@ body {
   /* float: right; */
   display: inline-block;
   width: 92%;
-  vertical-align: sub;
+  vertical-align: top;
 }
 
 .contents .item label .el-checkbox__input {

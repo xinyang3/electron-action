@@ -124,6 +124,7 @@ let rendererConfig = {
   },
   plugins: [
     new VueLoaderPlugin(),
+
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
