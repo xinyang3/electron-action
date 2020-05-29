@@ -4,6 +4,7 @@ import { app, BrowserWindow } from 'electron'
 import sysConfig from '../../static/config-sys'
 import Window from './windows'
 import './ipcmain'
+import createTray from './tray'
 
 /**
  * Set `__static` path to static files in production
@@ -23,7 +24,8 @@ function createWindow () {
 }
 
 app.on('ready', function () {
-  return (mainWindow = createWindow().mainWindow)
+  mainWindow = createWindow().mainWindow;
+  createTray(app)
 })
 
 app.on('window-all-closed', () => {
@@ -36,6 +38,10 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+app.on('quit', (e) => {
+
 })
 
 export { mainWindow }

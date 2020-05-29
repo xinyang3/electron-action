@@ -23,6 +23,12 @@ ipcRenderer.on('render-window-close', (e, args) => {
   }
 })
 
+// ipcRenderer.on('render-window-hide', (e, args) => {
+//   if (e) {
+//     console.warn(`${args}`)
+//   }
+// })
+
 /**
  * @description 渲染进程注册事件
  * @param {name} eventName {cb} callback function

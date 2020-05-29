@@ -24,7 +24,8 @@ export function createWindow (option) {
     transparent: false,
     frame: false,
     resizable: false,
-    show: true,
+    show: false,
+    backgroundColor: '#FAFAFA',
     fullscreenable: true,
     closeable: true,
     webPreferences: {
@@ -37,12 +38,12 @@ export function createWindow (option) {
 
   window.loadURL(`file://${paths}`)
 
-  if (process.env.NODE_ENV === 'development') {
-    window.webContents.openDevTools()
-  }
-  ipcRenderer.send('window-created', { browserId: bid })
-
-  window.on('shown', () => {
+  window.on('ready-to-show', () => {
+    ipcRenderer.send('window-created', { browserId: bid })
+    window.show()
+    if (process.env.NODE_ENV === 'development') {
+      window.webContents.openDevTools()
+    }
   })
 
   window.on('close', () => {

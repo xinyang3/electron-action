@@ -4,6 +4,7 @@ const browserId = require('electron').remote.getCurrentWindow().id
 const max = document.querySelector('#max');
 const min = document.querySelector('#min');
 const close = document.querySelector('#close');
+const hidden = document.querySelector('#hidden');
 
 if (max) {
   max.addEventListener('click', (e) => {
@@ -22,5 +23,12 @@ if (close) {
     e.preventDefault()
     require('electron').remote.getCurrentWindow().close()
     ipcRenderer.send('window-close', { browserId })
+  })
+}
+if (hidden) {
+  hidden.addEventListener('click', (e) => {
+    e.preventDefault()
+    // require('electron').remote.getCurrentWindow().close()
+    ipcRenderer.send('window-all-hidden', { browserId })
   })
 }
