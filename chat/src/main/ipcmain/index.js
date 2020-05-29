@@ -18,18 +18,15 @@ ipcMain.on('window-max', (e, { browserId }) => {
   logger.debugLog('window size is reset !')
   bw.webContents.send('render-window-max', 'window size is reset')
 })
-
 // 窗口最小化
 ipcMain.on('window-min', (e, { browserId }) => {
   BrowserWindow.fromId(browserId).minimize()
   logger.debugLog(`browserWindow ${browserId} is minimize !`)
 })
-
 // 创建渲染窗口
 ipcMain.on('window-created', (e, { browserId }) => {
   logger.debugLog(`browserWindow ${browserId} is created !`)
 })
-
 // 创建渲染窗口
 ipcMain.on('window-close', (e, { browserId }) => {
   const bw = BrowserWindow.fromId(browserId);
