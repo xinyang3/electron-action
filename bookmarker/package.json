@@ -1,0 +1,28 @@
+{
+  "name": "bookmarker",
+  "version": "1.0.0",
+  "description": "electron action",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xinyang3/electron-action.git"
+  },
+  "keywords": [
+    "electron",
+    "action",
+    "exercise"
+  ],
+  "author": "xinyang3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xinyang3/electron-action/issues"
+  },
+  "homepage": "https://github.com/xinyang3/electron-action#readme",
+  "dependencies": {
+    "electron": "^8.2.5"
+  }
+}
