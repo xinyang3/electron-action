@@ -1,0 +1,20 @@
+{
+  "name": "firesale",
+  "version": "1.0.0",
+  "description": "electron in action project",
+  "main": "app/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "..\\node_modules\\.bin\\electron ."
+  },
+  "keywords": [
+    "electron",
+    "firesale"
+  ],
+  "author": "xinyang3",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "9.0.0",
+    "marked": "^lastest"
+  }
+}
