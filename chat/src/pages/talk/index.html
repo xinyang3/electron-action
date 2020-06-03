@@ -2,12 +2,12 @@
 
 <head>
   <title>video talking</title>
-  <link rel="stylesheet" href="../../resource/css/base.css">
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.base %>static/css/base.css">
   </link>
-  <link rel="stylesheet" href="../../resource/css/iconfont/iconfont.css">
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.base %>static/css/iconfont/iconfont.css">
   </link>
-  <link rel="stylesheet" type="text/css" href="./style.css">
-  </style>
+  <!-- <link rel="stylesheet" type="text/css" href="./style.css">
+  </style> -->
 </head>
 
 <body class="drag">
@@ -31,8 +31,13 @@
       </div>
     </div>
   </section>
-  <script src="../../resource/js/render.js"></script>
-  <script src='./index-web.js'></script>
+  <!-- <script src="resource/js/render.js"></script> -->
+  <!-- <script>
+    require('./index-web.js')
+  </script> -->
 </body>
+<script>
+
+</script>
 
 </html>

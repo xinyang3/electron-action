@@ -103,7 +103,6 @@
     "copyright": "gjwl",
     "productName": "chat",
     "files": [
-      "./build/**/*",
       "./dist/**/*",
       "!node_modules/*"
     ],

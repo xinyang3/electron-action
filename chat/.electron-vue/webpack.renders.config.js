@@ -1,6 +1,6 @@
 'use strict'
 
-process.env.BABEL_ENV = 'renderer'
+process.env.BABEL_ENV = 'renders'
 
 const path = require('path')
 const { dependencies } = require('../package.json')
@@ -11,9 +11,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
-
 const sysConfig = require('../config-sys')
-const config = require('./config')
+const { env, reflects, getEntries } = require('./config')
+
+webpack.NodeTargetPlugin
 
 /**
  * List of node_modules to include in webpack bundle
@@ -24,11 +25,9 @@ const config = require('./config')
  */
 let whiteListedModules = ['vue']
 
-let rendererConfig = {
+let rendersConfig = {
   devtool: '#cheap-module-eval-source-map',
-  entry: {
-    renderer: path.join(__dirname, '../src/renderer/main.js')
-  },
+  entry: getEntries(),
   externals: [
     ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
   ],
@@ -61,6 +60,13 @@ let rendererConfig = {
         test: /\.css$/,
         use: ['vue-style-loader', 'css-loader']
       },
+      // {
+      //   test: /\.css$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: "style-loader",
+      //     use: "css-loader"
+      //   })
+      // },
       {
         test: /\.html$/,
         use: 'vue-html-loader',
@@ -69,12 +75,7 @@ let rendererConfig = {
       {
         test: /\.js$/,
         use: 'babel-loader',
-        exclude: /node_modules/,
-        // options: {
-        //   plugins: [
-        //     ''
-        //   ]
-        // }
+        exclude: /node_modules/
       },
       {
         test: /\.node$/,
@@ -131,66 +132,57 @@ let rendererConfig = {
   plugins: [
     new VueLoaderPlugin(),
 
-    new MiniCssExtractPlugin({ filename: 'styles.css' }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      templateParameters (compilation, assets, options) {
-        return {
-          compilation: compilation,
-          webpack: compilation.getStats().toJson(),
-          webpackConfig: compilation.options,
-          htmlWebpackPlugin: {
-            files: assets,
-            options: Object.assign({}, options, sysConfig)
-          },
-          process,
-        };
-      },
-      template: path.resolve(__dirname, '../src/index.ejs'),
-      minify: {
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        removeComments: true
-      },
-      base: process.env.NODE_ENV !== 'production' ? '/' : '../',
-      nodeModules: process.env.NODE_ENV !== 'production'
-        ? path.resolve(__dirname, '../node_modules')
-        : false
+    new MiniCssExtractPlugin({
+      filename: process.env.NODE_ENV === 'development' ? '[name].css' : '[name].[hash].css',
+      chunkFilename: process.env.NODE_ENV === 'development' ? '[id].css' : '[id].[hash].css',
     }),
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: path.join(__dirname, '../src/resource'), // 渲染进程共有的资源
-    //     to: path.join(__dirname, '../dist/electron/resource')
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   templateParameters (compilation, assets, options) {
+    //     return {
+    //       compilation: compilation,
+    //       webpack: compilation.getStats().toJson(),
+    //       webpackConfig: compilation.options,
+    //       htmlWebpackPlugin: {
+    //         files: assets,
+    //         options: Object.assign({}, options, sysConfig)
+    //       },
+    //       process,
+    //     };
     //   },
-    //   {
-    //     from: path.join(__dirname, '../src/renders'), // 除了vue渲染进程外其他的渲染页面
-    //     to: path.join(__dirname, '../dist/electron/renders')
-    //   }
-    // ]),
+    //   template: path.resolve(__dirname, '../src/index.ejs'),
+    //   minify: {
+    //     collapseWhitespace: true,
+    //     removeAttributeQuotes: true,
+    //     removeComments: true
+    //   },
+    //   nodeModules: process.env.NODE_ENV !== 'production'
+    //     ? path.resolve(__dirname, '../node_modules')
+    //     : false
+    // }),
     new webpack.DefinePlugin({
-      'process.env.AGORA_APPID': config.env.AGORA_APPID,
-      'process.env.AGORA_LOG_PATH': config.env.AGORA_LOG_PATH
+      'process.env.AGORA_APPID': env.AGORA_APPID,
+      'process.env.AGORA_LOG_PATH': env.AGORA_LOG_PATH
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
     chunkFilename: '[name].[hash].js',
-    path: path.join(__dirname, '../dist/electron/renderer')
+    path: path.join(__dirname, '../dist/electron/pages')
   },
   resolve: {
     alias: {
       'root': path.join(__dirname, '../'),
-      'render': path.join(__dirname, '../src/renderer'),
+      'pages': path.join(__dirname, '../src/pages'),
+      // 'render': path.join(__dirname, '../src/renderer'),
+      'resource': path.join(__dirname, '../src/resource'),
       'static': path.resolve(__dirname, '../static'),
       'main': path.join(__dirname, '../src/main'),
-      'resource': path.join(__dirname, '../src/resource'),
-      '@': path.join(__dirname, '../src/renderer'),
+      // '@': path.join(__dirname, '../src/renderer'),
       'src': path.join(__dirname, '../src'),
-      'store': path.join(__dirname, '../src/renderer/store'),
-      'components': path.join(__dirname, '../src/renderer/components'),
       'vue$': 'vue/dist/vue.esm.js'
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node']
@@ -210,11 +202,45 @@ let rendererConfig = {
   }
 }
 
+/** 
+ *  添加HtmlWebpackPlugin模板文件
+ */
+reflects.forEach(config => {
+  rendersConfig.plugins.push(
+    new HtmlWebpackPlugin({
+      filename: config.name,
+      template: config.entry,
+      templateParameters (compilation, assets, options) {
+        return {
+          compilation: compilation,
+          webpack: compilation.getStats().toJson(),
+          webpackConfig: compilation.options,
+          htmlWebpackPlugin: {
+            files: assets,
+            options: options
+          },
+          process,
+        };
+      },
+      base: process.env.NODE_ENV !== 'production' ? '/' : '../',
+      chunks: ['manifest', 'vendor', config.key], // 指定生成的模板文件引入的入口文件
+      minify: {
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        removeComments: true
+      },
+      nodeModules: process.env.NODE_ENV !== 'production'
+        ? path.resolve(__dirname, '../node_modules')
+        : false
+    }),
+  )
+})
+
 /**
- * Adjust rendererConfig for development settings
+ * Adjust rendersConfig for development settings
  */
 if (process.env.NODE_ENV !== 'production') {
-  rendererConfig.plugins.push(
+  rendersConfig.plugins.push(
     new webpack.DefinePlugin({
       '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`,
 
@@ -223,20 +249,13 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 /**
- * Adjust rendererConfig for production settings
+ * Adjust rendersConfig for production settings
  */
 if (process.env.NODE_ENV === 'production') {
-  rendererConfig.devtool = ''
+  rendersConfig.devtool = ''
 
-  rendererConfig.plugins.push(
+  rendersConfig.plugins.push(
     new MinifyPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../static'),
-        to: path.join(__dirname, '../dist/electron/static'),
-        ignore: ['.*']
-      }
-    ]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
     }),
@@ -246,4 +265,4 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-module.exports = rendererConfig
+module.exports = rendersConfig

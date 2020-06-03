@@ -23,3 +23,9 @@ body {
   height: 100%;
   min-height: 60rem;
 }
+
+.operate-menu {
+  position: absolute;
+  top: .6rem;
+  right: .5rem;
+}

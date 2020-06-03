@@ -36,12 +36,14 @@
   import {
     userlistGet
   } from 'render/request/chat'
-  import {
-    createWindow
-  } from 'render/tools/window'
+  // import {
+  //   createWindow
+  // } from 'render/tools/window'
   import {
     renderRegisterEvent
-  } from 'static/resource/js/ipcRender'
+  } from 'resource/js/ipcRender'
+
+  const createWindow = require('electron').remote.getGlobal('createWindow')
   export default {
     name: 'slidebar',
     inject: ['root'],
@@ -67,7 +69,7 @@
           resizable: true,
           modal: true,
           parent: require('electron').remote.getCurrentWindow(),
-          file: 'renders/users/index.html'
+          file: 'users.html'
         })
         let users = this.users;
         // 注册渲染进程确认和取消的事件
@@ -115,7 +117,7 @@
 
   .menu>header {
     /* height: 1rem; */
-    padding: 1.5rem 1rem;
+    padding: 2rem 1rem 1rem 1.5rem;
   }
 
   .menu>header i.plus {

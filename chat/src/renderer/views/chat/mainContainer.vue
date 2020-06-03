@@ -56,16 +56,19 @@
   import {
     msgSend
   } from "render/request/chat";
-  import {
-    getFile
-  } from "render/tools/dialogFile";
-  import {
-    createWindow
-  } from "render/tools/window";
+  // import {
+  //   getFile
+  // } from "render/tools/dialogFile";
+  // import {
+  //   createWindow
+  // } from "render/tools/window";
   import {
     getSize,
     resize
   } from 'render/tools/resize'
+
+  const createWindow = require('electron').remote.getGlobal('createWindow')
+  const selectFile = require('electron').remote.getGlobal('selectFile')
   export default {
     name: "mainContainer",
     components: {
@@ -89,7 +92,7 @@
         });
       },
       openFile() {
-        getFile().then(({
+        selectFile().then(({
           paths,
           filenames
         }) => {
@@ -102,7 +105,9 @@
           height: 600,
           modal: true,
           title: '语音通话',
-          file: "renders/talk/index.html"
+          modal: true,
+          parent: require('electron').remote.getCurrentWindow(),
+          file: 'talk.html'
         });
         // if (!this.sayWindow) {
         // this.sayWindow = createWindow("renders/talk/index.html");
@@ -131,13 +136,13 @@
 <style lang="scss" scoped>
   .container-content {
     float: left;
-    width: calc(100% - 27rem);
+    width: calc(100% - 22.2rem);
     height: 100%;
     background-color: #f2f3f5;
   }
 
   .container-content .wrap {
-    height: calc(100% - 5.4rem);
+    height: calc(100% - 7rem);
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -183,9 +188,10 @@
   }
 
   .head {
-    height: 5.2rem;
-    line-height: 5.2rem;
+    height: 5rem;
+    line-height: 5rem;
     border-bottom: 1px solid #dcdee0;
+    padding-top: 1.5rem;
   }
 
   .head span {

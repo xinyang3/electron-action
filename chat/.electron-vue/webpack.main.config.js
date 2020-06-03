@@ -7,7 +7,7 @@ const { dependencies } = require('../package.json')
 const webpack = require('webpack')
 
 const MinifyPlugin = require("babel-minify-webpack-plugin")
-const env = require('./env')
+const config = require('./config')
 let mainConfig = {
   entry: {
     main: path.join(__dirname, '../src/main/index.js')
@@ -46,16 +46,22 @@ let mainConfig = {
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
+    chunkFilename: '[name].[hash].js',
     path: path.join(__dirname, '../dist/electron')
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.AGORA_APPID': env.AGORA_APPID,
-      'process.env.AGORA_LOG_PATH': env.AGORA_LOG_PATH
+      'process.env.AGORA_APPID': config.env.AGORA_APPID,
+      'process.env.AGORA_LOG_PATH': config.env.AGORA_LOG_PATH
     })
   ],
   resolve: {
+    alias: {
+      'root': path.join(__dirname, '..'),
+      'resource': path.join(__dirname, '../src/resource'),
+      'src': path.join(__dirname, '../src')
+    },
     extensions: ['.js', '.json', '.node']
   },
   target: 'electron-main'

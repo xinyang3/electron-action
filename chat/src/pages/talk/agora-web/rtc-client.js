@@ -1,6 +1,6 @@
+
 const AgoraRTC = require('agora-rtc-sdk')
-const opera = require('./common')
-const addView = opera.addView; removeView = opera.removeView;
+// const { addView, removeView } = require('./common')
 
 const consoleLog = console.log, consoleWarn = console.warn, consoleErr = console.error
 
@@ -306,4 +306,8 @@ class RTCClient {
   // }
 }
 
-module.exports = RTCClient;
+const rTCClient = new RTCClient()
+
+export {
+  rTCClient
+}

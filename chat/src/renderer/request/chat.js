@@ -1,4 +1,4 @@
-import { request } from '../plugins/axios'
+import { request } from 'resource/js/axios'
 
 export function userlistGet () {
   return request.get('/user/list')

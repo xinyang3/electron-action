@@ -14,6 +14,7 @@ const buildConfig = require('./build.config')
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
 const webConfig = require('./webpack.web.config')
+const rendersConfig = require('./webpack.renders.config')
 
 const doneLog = chalk.bgGreen.white(' DONE ') + ' '
 const errorLog = chalk.bgRed.white(' ERROR ') + ' '
@@ -64,6 +65,16 @@ function build () {
   })
 
   pack(rendererConfig).then(result => {
+    results += result + '\n\n'
+    m.success('renderer')
+  }).catch(err => {
+    m.error('renderer')
+    console.log(`\n  ${errorLog}failed to build renderer process`)
+    console.error(`\n${err}\n`)
+    process.exit(1)
+  })
+
+  pack(rendersConfig).then(result => {
     results += result + '\n\n'
     m.success('renderer')
   }).catch(err => {

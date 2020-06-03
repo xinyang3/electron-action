@@ -11,7 +11,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
-const sysConfig = require('../static/config-sys')
+const rendersConfig = require('./webpack.renders.config')
+const sysConfig = require('../config-sys')
 
 let electronProcess = null
 let manualRestart = false
@@ -39,6 +40,59 @@ function logStats (proc, data) {
   console.log(log)
 }
 
+function startRenders () {
+  return new Promise((resolve, reject) => {
+    // rendersConfig.entry.renderer = [path.join(__dirname, 'dev-client')].concat(rendererConfig.entry.renderer)
+    rendersConfig.mode = 'development'
+    const compiler = webpack(rendersConfig)
+    hotMiddleware = webpackHotMiddleware(compiler, {
+      log: false,
+      heartbeat: 2500
+    })
+
+    compiler.hooks.compilation.tap('compilation', compilation => {
+      compilation.hooks.htmlWebpackPluginAfterEmit.tapAsync('html-webpack-plugin-after-emit', (data, cb) => {
+        hotMiddleware.publish({ action: 'reload' })
+        cb()
+      })
+    })
+
+    compiler.hooks.done.tap('done', stats => {
+      logStats('renders', stats)
+    })
+
+    const server = new WebpackDevServer(
+      compiler,
+      {
+        contentBase: path.join(__dirname, '../'),
+        quiet: true,
+        host: '0.0.0.0',
+        // proxy: {
+        //   '/api': {
+        //     target: 'http://127.0.0.1:5000', // 接口的域名
+        //     // secure: false,  // 如果是https接口，需要配置这个参数
+        //     changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+        //     pathRewrite: {
+        //       '^/api': ''
+        //     }
+        //   }
+        // },
+        before (app, ctx) {
+          app.use(hotMiddleware)
+          ctx.middleware.waitUntilValid(() => {
+            resolve()
+          })
+        }
+      }
+    )
+
+    server.listen(sysConfig.rport, (err) => {
+      logStats(`renders`, `start failed: ${err}`)
+    })
+  })
+}
+
+
 function startRenderer () {
   return new Promise((resolve, reject) => {
     rendererConfig.entry.renderer = [path.join(__dirname, 'dev-client')].concat(rendererConfig.entry.renderer)
@@ -65,6 +119,7 @@ function startRenderer () {
       {
         contentBase: path.join(__dirname, '../'),
         quiet: true,
+        host: '0.0.0.0',
         // proxy: {
         //   '/api': {
         //     target: 'http://127.0.0.1:5000', // 接口的域名
@@ -191,7 +246,7 @@ function greeting () {
 function init () {
   greeting()
 
-  Promise.all([startRenderer(), startMain()])
+  Promise.all([startRenderer(), startRenders(), startMain()])
     .then(() => {
       startElectron()
     })

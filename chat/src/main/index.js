@@ -1,11 +1,4 @@
 'use strict'
-
-import { app, BrowserWindow } from 'electron'
-import sysConfig from '../../static/config-sys'
-import Window from './windows'
-import './ipcmain'
-import createTray from './tray'
-
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -13,11 +6,20 @@ import createTray from './tray'
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
+
+import { app, BrowserWindow } from 'electron'
+import sysConfig from '../../config-sys'
+import Window from './windows'
+import './ipcmain'
+import './global'
+
+const { createTray } = require('./tray')
+
 let mainWindow = {}
 
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://${sysConfig.host}:${sysConfig.port}`
-  : `file://${__dirname}/index.html`
+  : `file://${__dirname}/renderer/index.html`
 
 function createWindow () {
   return new Window({ winURL: winURL })

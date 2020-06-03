@@ -3,13 +3,13 @@
  * @author xinyang3
  * @date 2020/5/15
  */
-import { getFileName } from 'render/tools/utils'
-const { dialog } = require('electron').remote
+import { getFileName } from './utils'
+const { dialog } = require('electron')
 
 const fs = require('fs')
 
 /** 获取文件 */
-export function getFile () {
+export function selectFile () {
   return dialog.showOpenDialog({
     title: '选择文件',
     filters: [

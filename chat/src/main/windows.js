@@ -5,7 +5,7 @@
  */
 
 import { BrowserWindow } from 'electron'
-import logger from '../../static/resource/js/logger'
+import logger from 'resource/js/logger'
 
 class Window {
   constructor(options) {
