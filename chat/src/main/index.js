@@ -8,11 +8,11 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 import { app, BrowserWindow } from 'electron'
-import sysConfig from '../../config-sys'
 import Window from './windows'
 import './ipcmain'
 import './global'
 
+const sysConfig = require('../../config-sys')
 const { createTray } = require('./tray')
 
 let mainWindow = {}
@@ -27,6 +27,7 @@ function createWindow () {
 
 app.on('ready', function () {
   mainWindow = createWindow().mainWindow;
+  global.setProperty('mainBrowserWindowId', mainWindow.id)
   createTray(app)
 })
 

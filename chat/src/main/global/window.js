@@ -7,7 +7,9 @@
 import path from 'path'
 import logger from 'src/resource/js/logger'
 import { ipcRender, ipcRenderer, BrowserWindow } from 'electron'
-import sysConfig from 'root/config-sys'
+// import sysConfig from 'root/config-sys'
+
+const sysConfig = require('../../../config-sys')
 
 /**
  * @description 创建渲染窗口并加载文件
@@ -64,24 +66,24 @@ export function createWindow (option) {
 }
 
 
-export function createWindowLocal (option) {
-  var paths = path.resolve(__static, option.file)
-  options = Object.assign({}, {
-    width: 400,
-    height: 600,
-    transparent: false,
-    frame: false,
-    resizable: false,
-    show: false,
-    backgroundColor: '#FAFAFA',
-    fullscreenable: true,
-    closeable: true,
-    webPreferences: {
-      nodeIntegration: true,
-      nodeIntegrationInSubFrame: true,
-      // preload: path.resolve(__dirname, '../preload.js')
-    }
-  }, option)
+// export function createWindowLocal (option) {
+//   var paths = path.resolve(__static, option.file)
+//   options = Object.assign({}, {
+//     width: 400,
+//     height: 600,
+//     transparent: false,
+//     frame: false,
+//     resizable: false,
+//     show: false,
+//     backgroundColor: '#FAFAFA',
+//     fullscreenable: true,
+//     closeable: true,
+//     webPreferences: {
+//       nodeIntegration: true,
+//       nodeIntegrationInSubFrame: true,
+//       // preload: path.resolve(__dirname, '../preload.js')
+//     }
+//   }, option)
 
-  return window(options)
-}
+//   return window(options)
+// }

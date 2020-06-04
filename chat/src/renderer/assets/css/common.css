@@ -26,6 +26,21 @@ body {
 
 .operate-menu {
   position: absolute;
-  top: .6rem;
-  right: .5rem;
+  top: 0.6rem;
+  right: 0.5rem;
+}
+.el-popover.popover-menus {
+  width: auto;
+  min-width: auto;
+}
+.popover-menus .item {
+  width: 9rem;
+  height: 3rem;
+  line-height: 3rem;
+  cursor: pointer;
+}
+.popover-menus .item i {
+  font-size: 1.6rem;
+}
+.popover-menus .item .text {
 }

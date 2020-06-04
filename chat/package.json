@@ -1,6 +1,7 @@
 {
   "name": "chat",
   "productName": "chat",
+  "productNameZh": "企业微信",
   "version": "0.0.1",
   "author": "xinyang.zhu@outlook.com",
   "description": "electron-vue chat video",
@@ -57,6 +58,7 @@
     "electron-builder": "^22.6.0",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",
+    "electron-dl": "^3.0.0",
     "electron-rebuild": "^1.8.1",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",

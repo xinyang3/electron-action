@@ -32,3 +32,20 @@ export function selectFile () {
     return Promise.resolve({ paths, filenames })
   })
 }
+
+
+export function selectDirectory () {
+  return dialog.showOpenDialog({
+    title: '选择文件',
+    filters: [
+      { name: 'All Files', extensions: ['*'] }
+    ],
+    properties: ['openDirectory',
+      'createDirectory']
+  }).then(data => {
+    if (data && data.canceled) return
+    console.log(data)
+    var paths = data.filePaths[0] // filepath
+    return Promise.resolve({ paths })
+  })
+}

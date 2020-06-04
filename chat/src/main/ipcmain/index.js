@@ -10,6 +10,7 @@ import {
   app
 } from 'electron'
 import logger from 'src/resource/js/logger'
+const fileDownload = require('../global/file')
 
 // 窗口最大化
 ipcMain.on('window-max', (e, {
@@ -51,14 +52,31 @@ ipcMain.on('window-close', (e, {
   logger.debugLog(`browserWindow ${browserId} is closed !`)
 })
 
-// 隐藏
+// 窗口隐藏
 ipcMain.on('window-all-hidden', (e, {
   browserId
 }) => {
   BrowserWindow.getAllWindows().forEach(window => window.hide())
   logger.debugLog(`all browserWindow is hiden !`)
 })
-
+// 主进程日志
 ipcMain.on('main-log', (e, log) => {
-  logger.debugLog(`$log`)
+  logger.debugLog(`${log}`)
 })
+
+// 文件下载 
+// ipcMain.on('file-download', (e, options) => {
+//   logger.debugLog('file download start ...')
+//   fileDownload(options).then(dl => {
+//     console.log(e.sender._events)
+//     e.sender.send('renderer-file-download', 1)
+//     options.callback && options.callback()
+//   })
+// })
+
+// ipcMain.handle('file-download', async (e, options) => {
+//   logger.debugLog('file download start ...')
+//   const result = await fileDownload(options)
+//   console.log(result)
+//   return result;
+// })
