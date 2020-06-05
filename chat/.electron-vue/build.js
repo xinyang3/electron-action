@@ -92,7 +92,6 @@ function pack (config) {
       if (err) reject(err.stack || err)
       else if (stats.hasErrors()) {
         let err = ''
-
         stats.toString({
           chunks: false,
           colors: true

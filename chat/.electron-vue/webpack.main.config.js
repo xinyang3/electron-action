@@ -9,6 +9,7 @@ const webpack = require('webpack')
 const MinifyPlugin = require("babel-minify-webpack-plugin")
 const config = require('./config')
 let mainConfig = {
+  mode: process.env.NODE_ENV,
   entry: {
     main: path.join(__dirname, '../src/main/index.js')
   },
@@ -31,7 +32,7 @@ let mainConfig = {
       {
         test: /\.js$/,
         use: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules\/(?!(electron-dl|webpack|core-js)).*/
       },
       {
         test: /\.node$/,

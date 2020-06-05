@@ -81,15 +81,14 @@
         //   url: 'http://pic.lvmama.com/uploads/pc/place2/2016-03-10/ce758154-ce30-4b31-a573-196351955d07.jpg',
         //   options: {}
         // }).then(dl => {})
-        console.log(this.path)
         fileDownload({
-          url: '/public/download/a.jpg',
+          url: 'http://127.0.0.1:5000/public/sublime.exe',
           options: {
             directory: this.path,
             onProgress: (data) => {
               console.log(data)
-              // console.log(percent)
-              // this.percent = percent * 100
+              console.log(percent)
+              this.percent = percent * 100
             },
           },
         })

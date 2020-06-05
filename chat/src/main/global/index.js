@@ -11,7 +11,6 @@ import { versions } from '../../../config-sys'
 const { fileDownload } = require('./file')
 const path = require('path')
 
-global = global || {}
 global.selectFile = selectFile;
 global.selectDirectory = selectDirectory;
 
