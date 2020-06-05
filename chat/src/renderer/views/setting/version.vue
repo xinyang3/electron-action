@@ -1,6 +1,6 @@
 <template>
   <el-container class="drag versions">
-    <el-aside>
+    <el-aside style="width: 30%">
       <p class="img no-drag">
         <i class="icon iconfont icon-weixin2"></i>
       </p>
@@ -14,7 +14,7 @@
           <span>当前版本: {{ versions.productName }} - {{ versions.version }}</span>
         </p>
         <p>
-          <span>最新版本: {{ latestVersion ? latestVersion : '未知'}}</span>
+          <span>最新版本: {{ latestVersion ? latestVersion : '未知' }}</span>
         </p>
         <p>
           <label>下载路径:</label>
@@ -24,7 +24,7 @@
         <footer>
           <el-button type="primary" @click="update">检查更新</el-button>
           <el-button type="primary" @click="download">下载最新
-            <span v-if="percent">{{percent}}%</span>
+            <span v-if="percent">{{ percent }}%</span>
           </el-button>
         </footer>
         <!-- <p v-if="percent"> -->
@@ -55,7 +55,7 @@
         versions: {},
         latestVersion: '',
         percent: 0,
-        path: ''
+        path: '',
       }
     },
     methods: {
@@ -67,7 +67,7 @@
         })
       },
       update() {
-        this.$http.post('/version/check').then(res => {
+        this.$http.post('/version/check').then((res) => {
           this.latestVersion = res.data.data
         })
       },
@@ -83,21 +83,20 @@
         // }).then(dl => {})
         console.log(this.path)
         fileDownload({
-          url: 'http://127.0.0.1:5000/public/Sublime.exe',
+          url: '/public/download/a.jpg',
           options: {
             directory: this.path,
-            onProgress: ({
-              percent
-            }) => {
+            onProgress: (data) => {
+              console.log(data)
               // console.log(percent)
-              this.percent = percent * 100
-            }
-          }
-        }).then(dl => {
-          this.percent = 0
-          console.log(dl)
+              // this.percent = percent * 100
+            },
+          },
         })
-      }
+        // .then(res => {
+        //   console.log(res.data)
+        // })
+      },
     },
     mounted() {},
   }
@@ -118,7 +117,7 @@
   }
 
   .el-aside {
-    width: 25%;
+    width: 30%;
   }
 
   .img,

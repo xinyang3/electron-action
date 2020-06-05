@@ -8,10 +8,10 @@ import { selectFile, selectDirectory } from './dialogFile'
 import { createWindow } from './window'
 import { versions } from '../../../config-sys'
 
-const fileDownload = require('./file')
+const { fileDownload } = require('./file')
 const path = require('path')
 
-
+global = global || {}
 global.selectFile = selectFile;
 global.selectDirectory = selectDirectory;
 

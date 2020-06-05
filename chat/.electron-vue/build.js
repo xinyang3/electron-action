@@ -37,7 +37,7 @@ function build () {
 
   del.sync(['dist/electron/*', '!.gitkeep'])
 
-  const tasks = ['main', 'renderer']
+  const tasks = ['main', 'renderer', 'renders']
   const m = new Multispinner(tasks, {
     preText: 'building',
     postText: 'process'
@@ -76,9 +76,9 @@ function build () {
 
   pack(rendersConfig).then(result => {
     results += result + '\n\n'
-    m.success('renderer')
+    m.success('renders')
   }).catch(err => {
-    m.error('renderer')
+    m.error('renders')
     console.log(`\n  ${errorLog}failed to build renderer process`)
     console.error(`\n${err}\n`)
     process.exit(1)

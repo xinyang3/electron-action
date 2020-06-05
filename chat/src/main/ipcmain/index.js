@@ -10,7 +10,6 @@ import {
   app
 } from 'electron'
 import logger from 'src/resource/js/logger'
-const fileDownload = require('../global/file')
 
 // 窗口最大化
 ipcMain.on('window-max', (e, {
