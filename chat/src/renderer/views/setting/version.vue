@@ -23,7 +23,8 @@
         </p>
         <footer>
           <el-button type="primary" @click="update">检查更新</el-button>
-          <el-button type="primary" @click="download">下载最新
+          <el-button type="primary" @click="download">
+            下载最新
             <span v-if="percent">{{ percent }}%</span>
           </el-button>
         </footer>
@@ -35,118 +36,111 @@
   </el-container>
 </template>
 <script>
-  import {
-    remote,
-    ipcRenderer
-  } from 'electron'
-  const fileDownload = remote.getGlobal('fileDownload')
-  const selectDirectory = remote.getGlobal('selectDirectory')
-  const rootPath = remote.getGlobal('rootPath')
-  const path = remote.require('path').resolve(rootPath, '.', 'download')
+import { remote, ipcRenderer } from "electron";
+const fileDownload = remote.getGlobal("fileDownload");
+const selectDirectory = remote.getGlobal("selectDirectory");
+const rootPath = remote.getGlobal("rootPath");
+const path = remote.require("path").resolve(rootPath, ".", "download");
 
-  export default {
-    name: 'version',
-    created() {
-      this.versions = remote.getGlobal('versions')
-      this.path = path
+export default {
+  name: "version",
+  created() {
+    this.versions = remote.getGlobal("versions");
+    this.path = path;
+  },
+  data() {
+    return {
+      versions: {},
+      latestVersion: "",
+      percent: 0,
+      path: ""
+    };
+  },
+  methods: {
+    selectDirectory() {
+      selectDirectory().then(({ paths }) => {
+        this.path = paths;
+      });
     },
-    data() {
-      return {
-        versions: {},
-        latestVersion: '',
-        percent: 0,
-        path: '',
-      }
+    update() {
+      this.$http.post("/version/check").then(res => {
+        this.latestVersion = res.data.data;
+      });
     },
-    methods: {
-      selectDirectory() {
-        selectDirectory().then(({
-          paths
-        }) => {
-          this.path = paths
-        })
-      },
-      update() {
-        this.$http.post('/version/check').then((res) => {
-          this.latestVersion = res.data.data
-        })
-      },
-      download() {
-        // ipcRenderer.send('file-download', {
-        //   url: 'http://pic.lvmama.com/uploads/pc/place2/2016-03-10/ce758154-ce30-4b31-a573-196351955d07.jpg',
-        //   options: {
+    download() {
+      // ipcRenderer.send('file-download', {
+      //   url: 'http://pic.lvmama.com/uploads/pc/place2/2016-03-10/ce758154-ce30-4b31-a573-196351955d07.jpg',
+      //   options: {
 
-        // })
-        // ipcRenderer.invoke('file-download', {
-        //   url: 'http://pic.lvmama.com/uploads/pc/place2/2016-03-10/ce758154-ce30-4b31-a573-196351955d07.jpg',
-        //   options: {}
-        // }).then(dl => {})
-        fileDownload({
-          url: 'http://127.0.0.1:5000/public/sublime.exe',
-          options: {
-            directory: this.path,
-            onProgress: (data) => {
-              console.log(data)
-              console.log(percent)
-              this.percent = percent * 100
-            },
-          },
-        })
-        // .then(res => {
-        //   console.log(res.data)
-        // })
-      },
-    },
-    mounted() {},
-  }
+      // })
+      // ipcRenderer.invoke('file-download', {
+      //   url: 'http://pic.lvmama.com/uploads/pc/place2/2016-03-10/ce758154-ce30-4b31-a573-196351955d07.jpg',
+      //   options: {}
+      // }).then(dl => {})
+      fileDownload({
+        url: "http://127.0.0.1:5000/public/s.msi",
+        options: {
+          directory: this.path,
+          onProgress: ({ percent }) => {
+            console.log(percent);
+            this.percent = percent * 100;
+          }
+        }
+      }).then(res => {
+        this.percent = 0;
+      });
+    }
+  },
+  mounted() {}
+};
 </script>
 <style lang="scss" scoped>
-  .versions {
-    background-color: #f2f3f5;
-  }
+.versions {
+  background-color: #f2f3f5;
+}
 
-  .el-container {
-    height: 100%;
-  }
+.el-container {
+  height: 100%;
+}
 
-  .el-aside,
-  .el-main {
-    display: flex;
-    flex-direction: column;
-  }
+.el-aside,
+.el-main {
+  display: flex;
+  flex-direction: column;
+}
 
-  .el-aside {
-    width: 30%;
-  }
+.el-aside {
+  width: 30%;
+}
 
-  .img,
-  .version {
-    margin: auto 0;
-    text-align: center;
-  }
+.img,
+.version {
+  margin: auto 0;
+  text-align: center;
+}
 
-  .img i {
-    font-size: 10rem;
-    color: #e0e2e3;
-  }
+.img i {
+  font-size: 10rem;
+  color: #e0e2e3;
+}
 
-  .version p {
-    height: 5rem;
-    line-height: 5rem;
-    text-align: left;
-  }
+.version p {
+  height: 5rem;
+  line-height: 5rem;
+  text-align: left;
+}
 
-  .version .el-input {
-    display: inline-block;
-    width: auto;
-  }
+.version .el-input {
+  display: inline-block;
+  width: auto;
+}
 
-  .version .el-input__inner {
-    width: 20rem;
-  }
+.version .el-input__inner {
+  width: 20rem;
+}
 
-  footer {
-    margin-top: 1rem;
-    float: left;
-  }
+footer {
+  margin-top: 1rem;
+  float: left;
+}
 </style>
