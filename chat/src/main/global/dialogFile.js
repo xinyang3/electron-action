@@ -8,7 +8,11 @@ const { dialog } = require('electron')
 
 const fs = require('fs')
 
-/** 获取文件 */
+/**
+ * @description 选择文件
+ * @export
+ * @returns { promise }
+ */
 export function selectFile () {
   return dialog.showOpenDialog({
     title: '选择文件',
@@ -33,7 +37,11 @@ export function selectFile () {
   })
 }
 
-
+/**
+ * @description 选择文件夹
+ * @export
+ * @returns { promsie(path) }
+ */
 export function selectDirectory () {
   return dialog.showOpenDialog({
     title: '选择文件',

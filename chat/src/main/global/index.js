@@ -1,5 +1,5 @@
 /**
- * @description 设置全局状态
+ * @description 设置全局状态 渲染进程调用使用remote.getGlobal('')
  * @author xinyang3
  * @date 2020/6/2
  */
@@ -10,7 +10,7 @@ import { versions } from '../../../config-sys';
 
 const { fileDownload } = require('./file');
 const path = require('path');
-const { log } = require('./log');
+const { logger } = require('../../resource/js/logger');
 
 global.selectFile = selectFile;
 global.selectDirectory = selectDirectory;
@@ -19,13 +19,13 @@ global.fileDownload = fileDownload;
 
 global.versions = versions;
 global.rootPath = path.resolve(__dirname, '../../../');
-global.log = log;
+global.logger = logger;
 
-global.setProperty = function(key, value) {
+global.setProperty = function (key, value) {
   return (global[key] = value);
 };
 
-global.getProperty = function(key) {
+global.getProperty = function (key) {
   return global[key];
 };
 

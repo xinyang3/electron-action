@@ -30,13 +30,13 @@ class Window {
     this.init(this.mainWindow);
   }
 
-  init(window) {
+  init (window) {
     window.loadURL(this.options.winURL);
-    window.once("ready-to-show", function() {
+    window.once("ready-to-show", function () {
       window.show();
-      // if (process.env.NODE_ENV === 'development') {
-      window.webContents.openDevTools();
-      // }
+      if (process.env.NODE_ENV === 'development') {
+        window.webContents.openDevTools();
+      }
       logger.okLog(`render process ${window.id} is created !`);
     });
 
@@ -46,11 +46,11 @@ class Window {
     });
   }
 
-  destroy() {
+  destroy () {
     this.mainWindow = null;
   }
 
-  getWindow() {
+  getWindow () {
     return this.mainWindow;
   }
 }
