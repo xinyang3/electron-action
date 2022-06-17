@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/xinyang3/electron-action#readme",
   "dependencies": {
-    "electron": "^8.2.5"
+    "electron": "^15.5.5"
   }
 }
